@@ -50,7 +50,7 @@ function App() {
           </Route>
           <Route path='*' element={<Notfound />} />
         </Routes>
-        {/* <header className='bg-background flex flex-wrap gap-4 items-center justify-center py-2'>
+        <header className='bg-background flex flex-wrap gap-4 items-center justify-center py-2'>
           <Link to='/'>Home</Link>
           <Link to='/about'>About</Link>
           <Link to='/sign-in'>SignIn</Link>
@@ -59,7 +59,7 @@ function App() {
           <Link to='/chinchilla'>NOTFOUND</Link>
           <Link to='/dashboard'>Dashboard</Link>
           <ThemeToggle />
-        </header> */}
+        </header>
       </BrowserRouter>
       {/* <h1 className='text-3xl font-bold'>Hello world!</h1>
       <div className='flex'>

@@ -23,6 +23,8 @@ const TopHeaderRightOptions = () => {
     try {
       await authService.logout();
       dispatch(signOut());
+      toast.success('Disconnected successfully!');
+      // Hpow1O4k
     } catch (err: any) {
       toast.error(err);
     }

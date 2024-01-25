@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import useSearchContacts from '@/hooks/requests/useSearchContacts';
+import { Link } from 'react-router-dom';
 
 const ContactList = () => {
   const { data, error, isLoading } = useSearchContacts();
@@ -56,9 +57,11 @@ const ContactList = () => {
         <Card>
           <CardHeader className='flex py-3 pb-4 flex-row justify-between items-center'>
             <CardTitle>Liste des contacts</CardTitle>
-            <Button>
-              <Plus size={22} className='mr-2' /> Ajouter un contact
-            </Button>
+            <Link to='/contact/new'>
+              <Button>
+                <Plus size={22} className='mr-2' /> Ajouter un contact
+              </Button>
+            </Link>
           </CardHeader>
 
           {/* <CardContent>

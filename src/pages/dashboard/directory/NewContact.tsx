@@ -78,13 +78,15 @@ const NewContact = () => {
         ...values,
         password,
         group,
-        avatar_url: 'https://via.placeholder.com/200x200.png',
+        avatar_url:
+          'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
       });
       await authService.registerContact({
         ...values,
         password,
         group,
-        avatar_url: 'https://via.placeholder.com/200x200.png',
+        avatar_url:
+          'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
       });
       toast.success('Contact created successfully');
       setLoading(false);

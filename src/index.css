@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-regular.ttf') format('ttf');
+  /* font-weight: 700; */
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  * {
+    /* outline: 1px solid red; */
+  }
+  :root {
+    --background: 0 0% 99%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 5.9% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 148.8 60.8% 47.1%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 93.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 160 35% 94.2%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 91%;
+    --input: 240 5.9% 90%;
+    --ring: 240 5.9% 10%;
+    --radius: 0px;
+  }
+
+  .dark {
+    --background: 0 0% 12.9%;
+    --foreground: 0 0% 90.2%;
+    --card: 240 4% 16%;
+    --card-foreground: 0 0% 90.2%;
+    --popover: 0 2% 10%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 148.9 64.3% 38.9%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 146 8% 19%;
+    --muted-foreground: 160 15% 92.2%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 72.8% 60.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 6% 27%;
+    --input: 240 6% 27%;
+    /* --input: 0 0% 18.8%; */
+    --ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fff;
+    color: #222;
+  }
+  html.dark body {
+    background-color: hsl(var(--background));
+    /* background-color: #171717; */
+    color: hsl(var(--foreground));
+  }
+  html *::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--foreground));
+  }
+  html.dark *::selection {
+    background-color: hsl(var(--primary));
+    color: hsl(var(--foreground));
+  }
+
+  .zag-shape-white {
+    fill: #eee;
+  }
+  .zag-shape-primary {
+    fill: hsl(var(--primary));
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+/* https://shadcn-ui-customizer.vercel.app/ */
+/* {"theme":"zinc","style":"default","cssVars":{"light":{"background":"0 0% 100%","foreground":"240 10% 3.9%","card":"0 0% 100%","card-foreground":"240 10% 3.9%","popover":"0 0% 100%;","popover-foreground":"240 10% 3.9%","primary":"148.8 60.8% 47.1%","primary-foreground":"0 0% 98%","secondary":"240 4.8% 95.9%","secondary-foreground":"240 5.9% 10%","muted":"160.0 15.0% 92.2%","muted-foreground":"240 3.8% 46.1%","accent":"240 4.8% 95.9%","accent-foreground":"240 5.9% 10%","destructive":"0 84.2% 60.2%","destructive-foreground":"0 0% 98%","border":"240 5.9% 90%","input":"240 5.9% 90%","ring":"240 5.9% 10%","radius":0},"dark":{"background":"0.0 0.0% 12.9%","foreground":"0.0 0.0% 90.2%","card":"0.0 0.0% 9.0%","card-foreground":"0 0% 98%","popover":"0.0 2.0% 10.0%","popover-foreground":"0 0% 98%","primary":"148.9 64.3% 32.9%","primary-foreground":"0.0 0.0% 100.0%","secondary":"240.0 5.4% 29.0%","secondary-foreground":"0 0% 98%","muted":"145.7 7.2% 19.0%","muted-foreground":"240 5% 64.9%","accent":"0.0 0.0% 20.0%","accent-foreground":"0 0% 98%","destructive":"0 62.8% 30.6%","destructive-foreground":"0 0% 98%","border":"240 3.7% 15.9%","input":"0.0 0.0% 18.8%","ring":"240 4.9% 83.9%"}}} */

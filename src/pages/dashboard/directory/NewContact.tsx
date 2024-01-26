@@ -58,14 +58,14 @@ const NewContact = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      first_name: 'Aziz',
-      last_name: 'CHANOU',
-      email: 'azizchanou@gmail.com',
-      gender: 'MAN',
-      phone_number: '51542563',
-      role: 'COMMERCIAL',
-    },
+    // defaultValues: {
+    //   first_name: 'Aziz',
+    //   last_name: 'CHANOU',
+    //   email: 'azizchanou@gmail.com',
+    //   gender: 'MAN',
+    //   phone_number: '51542563',
+    //   role: 'COMMERCIAL',
+    // },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -88,7 +88,9 @@ const NewContact = () => {
         avatar_url:
           'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
       });
-      toast.success('Contact created successfully');
+      toast.success(
+        'Contact created successfully :::: HERE IS THE PASSWORD: ' + password
+      );
       setLoading(false);
     } catch (err: String | any) {
       toast.error(err);

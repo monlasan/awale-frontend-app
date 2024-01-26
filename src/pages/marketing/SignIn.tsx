@@ -41,10 +41,10 @@ export default function SignIn() {
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: 'khaledsannyaml@gmail.com',
-      password: 'secretSauce',
-    },
+    // defaultValues: {
+    //   email: 'khaledsannyaml@gmail.com',
+    //   password: 'secretSauce',
+    // },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {

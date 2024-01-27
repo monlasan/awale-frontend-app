@@ -1,6 +1,7 @@
 // import React from 'react';
 import { cn } from '@/lib/utils';
 import {
+  ArrowLeftRight,
   BookOpenText,
   BookUser,
   Boxes,
@@ -26,67 +27,73 @@ const AsideNavigation = () => {
 
   const GROUP_LINKS = [
     {
-      groupName: 'Tableau de bord',
+      groupName: 'Dashboard',
       groupIcon: <PieChart size={20} />,
       groupLink: '/dashboard',
       groupLinkIsActive: currentPath.startsWith('/dashboard'),
     },
     {
-      groupName: 'Répertoire',
+      groupName: 'Contacts',
       groupIcon: <BookUser size={20} />,
       groupLink: null,
       groupLinkIsActive: currentPath.startsWith('/contact'),
       groupLinks: [
         {
           to: '/contact/list',
-          text: 'Liste des contacts',
+          text: 'Contacts list',
           linkIcon: <List size={20} />,
           isActive: currentPath.startsWith('/contact/list'),
         },
         {
           to: '/contact/new',
-          text: 'Créer un contact',
+          text: 'Add a contact',
           linkIcon: <UserPlus size={20} />,
           isActive: currentPath.startsWith('/contact/create'),
         },
       ],
     },
     {
-      groupName: 'Catalogue',
+      groupName: 'Articles',
       groupIcon: <BookOpenText size={20} />,
       groupLink: null,
-      groupLinkIsActive: currentPath.startsWith('/catalog'),
+      groupLinkIsActive: currentPath.startsWith('/article'),
       groupLinks: [
         {
-          to: '/product/list',
-          text: 'Liste des articles',
+          to: '/article/list',
+          text: 'Articles list',
           linkIcon: <List size={20} />,
-          isActive: currentPath.startsWith('/product/list'),
+          isActive: currentPath.startsWith('/article/list'),
         },
         {
-          to: '/product/new',
-          text: 'Ajouter un article',
+          to: '/article/new',
+          text: 'Add an article',
           linkIcon: <PackagePlus size={20} />,
-          isActive: currentPath.startsWith('/product/new'),
+          isActive: currentPath.startsWith('/article/new'),
         },
       ],
     },
     {
-      groupName: 'Stock',
+      groupName: 'Inventory',
       groupIcon: <Boxes size={20} />,
       groupLink: null,
-      groupLinkIsActive: currentPath.startsWith('/stock'),
+      groupLinkIsActive: currentPath.startsWith('/inventory'),
       groupLinks: [
         {
-          to: '/stock/states',
-          text: 'Etat des stocks',
+          to: '/inventory/manage',
+          text: 'Inventory management',
           linkIcon: <FileBox size={20} />,
-          isActive: currentPath.startsWith('/stock/states'),
+          isActive: currentPath.startsWith('/inventory/manage'),
+        },
+        {
+          to: '/dashboard',
+          text: 'Marchandise transfert',
+          linkIcon: <ArrowLeftRight size={20} />,
+          isActive: currentPath.startsWith('/dashboard'),
         },
       ],
     },
     {
-      groupName: 'Achat',
+      groupName: 'Purchase',
       groupIcon: <ShoppingCart size={20} />,
       groupLink: null,
       groupLinkIsActive: currentPath.startsWith('/purchase'),
@@ -94,38 +101,38 @@ const AsideNavigation = () => {
       groupLinks: [
         {
           to: '/purchase/list',
-          text: 'Liste des documents',
+          text: 'Documents list',
           linkIcon: <List size={20} />,
           isActive: currentPath.startsWith('/purchase/list'),
         },
         {
           to: '/purchase/new/quotation',
-          text: 'Créer une cotation',
+          text: 'Create a quotation',
           linkIcon: <Scroll size={20} />,
           isActive: currentPath.startsWith('/purchase/new/quotation'),
         },
         {
           to: '/purchase/new/delivery',
-          text: 'Créer une livraison',
+          text: 'Create a delivery',
           linkIcon: <Truck size={20} />,
           isActive: currentPath.startsWith('/purchase/new/delivery'),
         },
         {
           to: '/purchase/new/order',
-          text: 'Créer une commande',
+          text: 'Create an order',
           linkIcon: <ReceiptText size={20} />,
           isActive: currentPath.startsWith('/purchase/new/order'),
         },
         {
           to: '/purchase/new/bill',
-          text: 'Créer une facture',
+          text: 'Create a bill',
           linkIcon: <ScrollText size={20} />,
           isActive: currentPath.startsWith('/purchase/new/bill'),
         },
       ],
     },
     {
-      groupName: 'Vente',
+      groupName: 'Sale',
       groupIcon: <Store size={20} />,
       groupLink: null,
       groupLinkIsActive: currentPath.startsWith('/sale'),
@@ -133,31 +140,31 @@ const AsideNavigation = () => {
       groupLinks: [
         {
           to: '/sale/list',
-          text: 'Liste des documents',
+          text: 'Documents list',
           linkIcon: <List size={20} />,
           isActive: currentPath.startsWith('/sale/list'),
         },
         {
           to: '/sale/new/quote',
-          text: 'Créer un devis',
+          text: 'Create a quote',
           linkIcon: <Scroll size={20} />,
           isActive: currentPath.startsWith('/sale/new/quote'),
         },
         {
           to: '/sale/new/delivery',
-          text: 'Créer une livraison',
+          text: 'Create a delivery',
           linkIcon: <Truck size={20} />,
           isActive: currentPath.startsWith('/sale/new/delivery'),
         },
         {
           to: '/sale/new/order',
-          text: 'Créer une commande',
+          text: 'Create an order',
           linkIcon: <ReceiptText size={20} />,
           isActive: currentPath.startsWith('/sale/new/order'),
         },
         {
           to: '/sale/new/bill',
-          text: 'Créer une facture',
+          text: 'Create a bill',
           linkIcon: <ScrollText size={20} />,
           isActive: currentPath.startsWith('/sale/new/bill'),
         },

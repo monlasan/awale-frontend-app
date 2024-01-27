@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { columns, Contact } from '../components/DTContactListColumns';
+import { columns, Contact } from '../_components/DTContactListColumns';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import {
@@ -56,10 +56,10 @@ const ContactList = () => {
       <div className='px-4 py-4 h-full flex flex-col '>
         <Card>
           <CardHeader className='flex py-3 pb-4 flex-row justify-between items-center'>
-            <CardTitle>Liste des contacts</CardTitle>
+            <CardTitle>Contacts list</CardTitle>
             <Link to='/contact/new'>
               <Button>
-                <Plus size={22} className='mr-2' /> Ajouter un contact
+                <Plus size={22} className='mr-2' /> Add a contact
               </Button>
             </Link>
           </CardHeader>
@@ -71,25 +71,25 @@ const ContactList = () => {
         <div className='grid gap-4 p-6 bg-zinc-400/10 border-l border-r border-b mb-4'>
           <div className='grid grid-cols-2 gap-4 gap-y-1 flex-1'>
             <div>
-              <Label htmlFor='fullName'>Nom/Prénoms</Label>
+              <Label htmlFor='fullName'>Name</Label>
               <Input
                 type='fullName'
                 id='fullName'
-                placeholder='Rechercher par nom/prénoms'
+                placeholder='Search by name'
               />
             </div>
             <div>
               <Label htmlFor='role'>Roles</Label>
               <Select>
                 <SelectTrigger id='role'>
-                  <SelectValue placeholder='Sélectionner un role' />
+                  <SelectValue placeholder='Select a role' />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value='admin'>Administrateur</SelectItem>
-                    <SelectItem value='commercial'>Commercial</SelectItem>
-                    <SelectItem value='provider'>Fournisseur</SelectItem>
-                    <SelectItem value='constructor'>Constructeur</SelectItem>
+                    <SelectItem value='ADMIN'>Administratorr</SelectItem>
+                    <SelectItem value='COMMERCIAL'>Commercial</SelectItem>
+                    <SelectItem value='PROVIDER'>Provider</SelectItem>
+                    <SelectItem value='CONSTRUCTOR'>Constructor</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
@@ -98,7 +98,7 @@ const ContactList = () => {
           <div>
             <Button>
               <Search size={20} className='mr-2' />
-              Rechercher
+              Search
             </Button>
           </div>
         </div>

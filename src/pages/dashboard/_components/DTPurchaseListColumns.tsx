@@ -27,7 +27,7 @@ export type Purchase = {
 export const columns: ColumnDef<Purchase>[] = [
   {
     accessorKey: 'reference',
-    header: 'Référence',
+    header: 'Reference',
   },
   {
     accessorKey: 'type',

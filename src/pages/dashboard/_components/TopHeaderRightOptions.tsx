@@ -21,8 +21,8 @@ const TopHeaderRightOptions = () => {
 
   const handleSignOut = async () => {
     try {
-      await authService.logout();
       dispatch(signOut());
+      await authService.logout();
       toast.success('Disconnected successfully!');
       // Hpow1O4k
     } catch (err: any) {

@@ -1,5 +1,5 @@
-import AsideNavigation from '@/pages/dashboard/components/AsideNavigation';
-import TopHeaderRightOptions from '@/pages/dashboard/components/TopHeaderRightOptions';
+import AsideNavigation from '@/pages/dashboard/_components/AsideNavigation';
+import TopHeaderRightOptions from '@/pages/dashboard/_components/TopHeaderRightOptions';
 import React from 'react';
 
 type TLayout = {

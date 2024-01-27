@@ -63,3 +63,10 @@ export function formatOption(label: string, arrayOfOptions: Option[]) {
   const filt = arrayOfOptions.filter((s) => s.label === label)[0].value;
   return filt;
 }
+export function formatDate(date: string) {
+  return new Date(date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}

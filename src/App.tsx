@@ -1,6 +1,7 @@
 // import { Button } from '@/components/ui/button';
 // import ThemeToggle from '@/components/theme-toggle';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import AlreadyLoggedIn from './components/already-logged-in';
 import PrivateRoute from './components/private-route';
 import Home from './pages/marketing/Home';
 import About from './pages/marketing/About';
@@ -10,13 +11,13 @@ import Profile from './pages/dashboard/Profile';
 
 import Dashboard from './pages/dashboard';
 import ThemeToggle from './components/theme-toggle';
-import ContactList from './pages/dashboard/directory/ContactList';
+import ContactList from './pages/dashboard/contact/ContactList';
 import PurchaseList from './pages/dashboard/purchase/PurchaseList';
 import SaleList from './pages/dashboard/sale/SaleList';
-import ProductList from './pages/dashboard/product/ProductList';
-import AlreadyLoggedIn from './components/already-logged-in';
+import ArticleList from './pages/dashboard/article/ArticleList';
 import Notfound from './pages/marketing/Notfound';
-import NewContact from './pages/dashboard/directory/NewContact';
+import NewContact from './pages/dashboard/contact/NewContact';
+import NewArticle from './pages/dashboard/article/NewArticle';
 
 function App() {
   return (
@@ -41,8 +42,9 @@ function App() {
             {/* CONTACT */}
             <Route path='/contact/list' element={<ContactList />} />
             <Route path='/contact/new' element={<NewContact />} />
-            {/* PRODUCT */}
-            <Route path='/product/list' element={<ProductList />} />
+            {/* ARTICLES */}
+            <Route path='/article/list' element={<ArticleList />} />
+            <Route path='/article/new' element={<NewArticle />} />
             {/* PURCHASE */}
             <Route path='/purchase/list' element={<PurchaseList />} />
             {/* SALE */}

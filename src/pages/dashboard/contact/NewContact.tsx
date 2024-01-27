@@ -35,21 +35,15 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import authService from '@/services/http/auth.service';
 
 const formSchema = z.object({
-  first_name: z.string({
-    required_error: 'Please enter your first name',
-  }),
-  last_name: z.string({
-    required_error: 'Please enter your last name',
-  }),
+  first_name: z.string().min(1, 'Please enter a first name'),
+  last_name: z.string().min(1, 'Please enter a last name'),
   email: z.string().email('Please enter a valid email'),
-  gender: z.string({
-    required_error: 'Please select a gender',
-  }),
+  gender: z.string().min(1, 'Please select a gender'),
   phone_number: z.string({
-    required_error: 'Please enter your phone number',
+    required_error: 'Please enter a phone number',
   }),
   role: z.enum(['ADMIN', 'PROVIDER', 'CONSTRUCTOR', 'COMMERCIAL'], {
-    required_error: 'You need to select a role.',
+    required_error: 'Please select a role.',
   }),
 });
 
@@ -58,14 +52,14 @@ const NewContact = () => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    // defaultValues: {
-    //   first_name: 'Aziz',
-    //   last_name: 'CHANOU',
-    //   email: 'azizchanou@gmail.com',
-    //   gender: 'MAN',
-    //   phone_number: '51542563',
-    //   role: 'COMMERCIAL',
-    // },
+    defaultValues: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      gender: '',
+      phone_number: '',
+      role: 'COMMERCIAL',
+    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -73,14 +67,6 @@ const NewContact = () => {
     try {
       const password = generateRandomPassword();
       const group = values.role !== 'ADMIN' ? 'COLLABORATORS' : 'ADMINS';
-      // SAVE THE CONTACT
-      console.log('SAVE THE CONTACT ▶', {
-        ...values,
-        password,
-        group,
-        avatar_url:
-          'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
-      });
       await authService.registerContact({
         ...values,
         password,
@@ -91,6 +77,7 @@ const NewContact = () => {
       toast.success(
         'Contact created successfully :::: HERE IS THE PASSWORD: ' + password
       );
+      form.reset();
       setLoading(false);
     } catch (err: String | any) {
       toast.error(err);
@@ -115,33 +102,14 @@ const NewContact = () => {
               Save
             </Button>
           </CardHeader>
-
-          {/* <CardHeader className='py-3 pb-3'>
-            <CardTitle>Add a collaborator</CardTitle>
-            <CardDescription>
-              Collaborator account creation form.
-            </CardDescription>
-          </CardHeader> */}
         </Card>
         <div className='flex bg-zinc-400/10 border-l border-r border-b mb-4'>
-          {/* <div className='flex-1 p-16 px-20 flex justify-center items-start'>
-            <div className='p-0 bg-white dark:bg-zinc-50 text-zinc-800 w-full border shadow-sm'>
-            </div>
-          </div> */}
-          {/* <ScrollArea className='gap-4 py-6 max-w-[400px] max-h-[600px] w-full bg-accent border-l'> */}
-          <ScrollArea className='gap-4 py-6  w-full bg-accent '>
+          <ScrollArea className='gap-4 py-4 pb-6 w-full bg-accent '>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
                 className='space-y-3 w-full'
               >
-                {/* <div className='pb-1 mx-6'>
-                  <Button disabled={loading} className=' w-full' type='submit'>
-                    {loading && <Loader className='mr-2 animate-spin' />}
-                    {!loading && <Save className='mr-2' />}
-                    Save
-                  </Button>
-                </div> */}
                 <FormField
                   control={form.control}
                   name='role'

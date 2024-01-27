@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { columns, Sale } from '../components/DTSaleListColumns';
+import { columns, Sale } from '../_components/DTSaleListColumns';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import {

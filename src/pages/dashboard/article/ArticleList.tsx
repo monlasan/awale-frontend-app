@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Search } from 'lucide-react';
+import { Loader, Plus, Search } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { DataTable } from '@/components/ui/data-table';
@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { columns, Product } from '../components/DTProductListColumns';
+import { columns, Article } from '../_components/DTArticleListColumns';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import {
@@ -24,25 +24,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import useSearchArticles from '@/hooks/requests/useSearchArticles';
 
-const ProductList = () => {
-  const data: Product[] = [
-    {
-      id: '728ed52f',
-      reference: 'ART-728ed52f',
-      name: 'Sanny Khaled',
-      price_ttc: 5000,
-      created_at: '2022-01-01',
-      updated_at: '2022-02-01',
-    },
-  ];
+const ArticleList = () => {
+  const { data, error, isLoading } = useSearchArticles();
+  console.log('ARTICLES FETCHED', data);
 
+  // const data: Article[] = [
+  //   {
+  //     id: '728ed52f',
+  //     reference: 'ART-728ed52f',
+  //     name: 'Sanny Khaled',
+  //     photo_url: null,
+  //     price: 5000,
+  //     created_at: '2024-01-26T22:21:40.306Z',
+  //     updated_at: '2024-01-26T22:21:40.306Z',
+  //   },
+  // ];
+
+  if (error) {
+    return (
+      <DashboardLayout>
+        <div className='p-8 rounded-lg border-destructive border m-8 bg-destructive text-destructive-foreground'>
+          <p>Something went wrong !</p>
+        </div>
+      </DashboardLayout>
+    );
+  }
   return (
     <DashboardLayout>
       <div className='px-4 py-4 h-full flex flex-col '>
         <Card>
           <CardHeader className='flex py-3 pb-3 flex-row justify-between items-center'>
-            <CardTitle>Documents d'achat</CardTitle>
+            <CardTitle>Articles list</CardTitle>
           </CardHeader>
 
           {/* <CardContent>
@@ -81,16 +95,22 @@ const ProductList = () => {
           <div>
             <Button>
               <Search size={20} className='mr-2' />
-              Rechercher
+              Search
             </Button>
           </div>
         </div>
-        <div className='bg-white dark:bg-secondary'>
-          <DataTable columns={columns} data={data} />
-        </div>
+        {isLoading ? (
+          <div className='flex p-6 justify-center'>
+            <Loader size={30} className='animate-spin' />
+          </div>
+        ) : (
+          <div className='bg-white dark:bg-secondary'>
+            <DataTable columns={columns} data={data} />
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );
 };
 
-export default ProductList;
+export default ArticleList;

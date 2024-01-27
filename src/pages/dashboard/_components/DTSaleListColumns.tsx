@@ -9,40 +9,64 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-// import { Badge } from '@/components/ui/badge';
+import { Badge } from '@/components/ui/badge';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Product = {
+export type Sale = {
   id: string;
   reference: string;
-  name: string;
-  price_ttc: number;
+  type: string;
+  client_fullname: string;
+  amount: number;
+  state: 'inWritting' | 'isCompleted';
   created_at: string;
   updated_at: string;
 };
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<Sale>[] = [
   {
     accessorKey: 'reference',
-    header: 'Référence',
+    header: 'Reference',
   },
   {
-    accessorKey: 'name',
+    accessorKey: 'type',
+    header: 'Type de document',
+  },
+  {
+    accessorKey: 'state',
     header: ({ column }) => {
       return (
         <button
           className='flex items-center gap-1'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Article
+          État
+          <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
+        </button>
+      );
+    },
+    cell: ({ row }) => {
+      const state: string = row.getValue('state');
+      return <Badge variant='secondary'>{state}</Badge>;
+    },
+  },
+  {
+    accessorKey: 'client_fullname',
+    header: ({ column }) => {
+      return (
+        <button
+          className='flex items-center gap-1'
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Client
           <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
         </button>
       );
     },
   },
   {
-    accessorKey: 'price_ttc',
+    accessorKey: 'amount',
     header: 'Montant',
   },
   {
@@ -53,7 +77,7 @@ export const columns: ColumnDef<Product>[] = [
     id: 'actions',
     // header: 'Actions',
     cell: ({ row }) => {
-      const purchaseDocument = row.original;
+      const saleDocument = row.original;
 
       return (
         <DropdownMenu>
@@ -66,12 +90,12 @@ export const columns: ColumnDef<Product>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(purchaseDocument.id)}
+              onClick={() => navigator.clipboard.writeText(saleDocument.id)}
             >
               Voir les détails
             </DropdownMenuItem>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(purchaseDocument.id)}
+              onClick={() => navigator.clipboard.writeText(saleDocument.id)}
             >
               Modifier
             </DropdownMenuItem>

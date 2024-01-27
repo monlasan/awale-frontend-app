@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { columns, Purchase } from '../components/DTPurchaseListColumns';
+import { columns, Purchase } from '../_components/DTPurchaseListColumns';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import {

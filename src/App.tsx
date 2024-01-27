@@ -18,6 +18,7 @@ import ArticleList from './pages/dashboard/article/ArticleList';
 import Notfound from './pages/marketing/Notfound';
 import NewContact from './pages/dashboard/contact/NewContact';
 import NewArticle from './pages/dashboard/article/NewArticle';
+import InventoryManagement from './pages/dashboard/inventory/InventoryManagement';
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
             {/* ARTICLES */}
             <Route path='/article/list' element={<ArticleList />} />
             <Route path='/article/new' element={<NewArticle />} />
+            {/* INVENTORY */}
+            <Route path='/inventory/manage' element={<InventoryManagement />} />
             {/* PURCHASE */}
             <Route path='/purchase/list' element={<PurchaseList />} />
             {/* SALE */}

@@ -11,22 +11,22 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { formatDate } from '@/lib/utils';
-
+import { Badge } from '@/components/ui/badge';
 // import { Badge } from '@/components/ui/badge';
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Article = {
+export type Inventory = {
   id: string;
   reference: string;
   name: string;
-  photo_url: string | null;
-  price: number;
+  address: string;
+  description: string;
+  physical_quantity: number;
+  limit: number;
   created_at: string;
   updated_at: string;
 };
 
-export const columns: ColumnDef<Article>[] = [
+export const columns: ColumnDef<Inventory>[] = [
   {
     accessorKey: 'reference',
     header: 'Reference',
@@ -39,52 +39,42 @@ export const columns: ColumnDef<Article>[] = [
           className='flex items-center gap-1'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          Article
+          Inventory
           <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
         </button>
       );
     },
-    cell: ({ row }) => {
-      const name: string = row.getValue('name');
-      const photo_url = row.original.photo_url;
-      return (
-        <div className='flex items-center gap-2'>
-          <>
-            <Avatar>
-              <AvatarImage
-                src={
-                  photo_url && photo_url.length > 0
-                    ? photo_url
-                    : 'https://via.placeholder.com/200x200.png'
-                }
-                alt={'@' + name}
-              />
-              <AvatarFallback className='text-black uppercase dark:text-zinc-200'>
-                {name[0] + '' + name[1]}
-              </AvatarFallback>
-            </Avatar>
-          </>
-          <span>{name}</span>
-        </div>
-      );
-    },
+    // cell: ({ row }) => {
+    //   const name: string = row.getValue('name');
+    //   const photo_url = row.original.photo_url;
+    //   return (
+    //     <div className='flex items-center gap-2'>
+    //       <>
+    //         <Avatar>
+    //           <AvatarImage
+    //             src={
+    //               photo_url && photo_url.length > 0
+    //                 ? photo_url
+    //                 : 'https://via.placeholder.com/200x200.png'
+    //             }
+    //             alt={'@' + name}
+    //           />
+    //           <AvatarFallback className='text-black uppercase dark:text-zinc-200'>
+    //             {name[0] + '' + name[1]}
+    //           </AvatarFallback>
+    //         </Avatar>
+    //       </>
+    //       <span>{name}</span>
+    //     </div>
+    //   );
+    // },
   },
   {
-    accessorKey: 'price',
-    header: 'Price',
-  },
-  {
-    accessorKey: 'created_at',
-    header: 'Created at',
+    accessorKey: 'limit',
+    header: 'State',
     cell: ({ row }) => {
-      return <time>{formatDate(row.getValue('created_at'))}</time>;
-    },
-  },
-  {
-    accessorKey: 'updated_at',
-    header: 'Last update',
-    cell: ({ row }) => {
-      return <time>{formatDate(row.getValue('updated_at'))}</time>;
+      const limit = row.getValue('limit');
+      return <Badge variant='outline'>In stock</Badge>;
     },
   },
   {

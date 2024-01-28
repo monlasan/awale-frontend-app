@@ -2,8 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import userReducer from './user/user.slice';
+import sideNavReducer from './sidenav/sideNav.slice';
 
-const rootReducer = combineReducers({ user: userReducer });
+const rootReducer = combineReducers({
+  user: userReducer,
+  sidenav: sideNavReducer,
+});
 
 const persistConfig = {
   key: 'root',

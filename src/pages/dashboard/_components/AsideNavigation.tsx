@@ -1,5 +1,7 @@
 // import React from 'react';
+import { useAppSelector } from '@/hooks/useRedux';
 import { cn } from '@/lib/utils';
+import { toggle } from '@/redux/sidenav/sideNav.slice';
 import {
   ArrowLeftRight,
   BookOpenText,
@@ -18,12 +20,16 @@ import {
   Truck,
   // User,
   UserPlus,
+  Users,
 } from 'lucide-react';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 const AsideNavigation = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
+  const { isToggled } = useAppSelector((state) => state.sidenav);
 
   const GROUP_LINKS = [
     {
@@ -49,6 +55,26 @@ const AsideNavigation = () => {
           text: 'Add a contact',
           linkIcon: <UserPlus size={20} />,
           isActive: currentPath.startsWith('/contact/create'),
+        },
+      ],
+    },
+    {
+      groupName: 'Customers',
+      groupIcon: <Users size={20} />,
+      groupLink: null,
+      groupLinkIsActive: currentPath.startsWith('/customer'),
+      groupLinks: [
+        {
+          to: '/customer/list',
+          text: 'Customers list',
+          linkIcon: <List size={20} />,
+          isActive: currentPath.startsWith('/customer/list'),
+        },
+        {
+          to: '/customer/new',
+          text: 'Add a customer',
+          linkIcon: <UserPlus size={20} />,
+          isActive: currentPath.startsWith('/customer/create'),
         },
       ],
     },
@@ -79,10 +105,10 @@ const AsideNavigation = () => {
       groupLinkIsActive: currentPath.startsWith('/inventory'),
       groupLinks: [
         {
-          to: '/inventory/manage',
-          text: 'Inventory management',
+          to: '/inventory/overview',
+          text: 'Inventory overview',
           linkIcon: <FileBox size={20} />,
-          isActive: currentPath.startsWith('/inventory/manage'),
+          isActive: currentPath.startsWith('/inventory/overview'),
         },
         {
           to: '/dashboard',
@@ -174,9 +200,17 @@ const AsideNavigation = () => {
 
   return (
     // bg-secondary text-secondary-foreground
-    <div className='fixed z-30 left-0 top-[58px] bottom-0 max-w-52 sm:w-full dark:bg-secondary dark:text-secondary-foreground  flex-col flex-shrink  border-r py-4 border-zinc-200 dark:border-zinc-700 '>
+    <div
+      className={cn(
+        'fixed z-30 left-0 top-[58px] bottom-0  dark:bg-secondary dark:text-secondary-foreground  flex-col flex-shrink  border-r py-4 border-zinc-200 dark:border-zinc-700',
+        !isToggled && 'max-w-52 sm:w-full transition-all'
+      )}
+    >
       <div className='px-4 mb-3'>
-        <button className='p-3 bg-secondary w-5 h-5 grid place-content-center'>
+        <button
+          onClick={() => dispatch(toggle())}
+          className='p-3 bg-secondary w-5 h-5 grid place-content-center'
+        >
           <Menu size={14} />
         </button>
       </div>
@@ -206,8 +240,9 @@ const AsideNavigation = () => {
 
               <span
                 className={cn(
-                  'hidden sm:inline-block ml-1 dark:group-hover:opacity-100',
-                  !group.groupLinkIsActive && 'dark:opacity-60'
+                  'ml-1 dark:group-hover:opacity-100 transition-all',
+                  !group.groupLinkIsActive && 'dark:opacity-60',
+                  isToggled ? 'hidden' : 'sm:inline-block '
                 )}
               >
                 {group.groupName}
@@ -231,7 +266,12 @@ const AsideNavigation = () => {
                 {group.groupIcon}
               </span>
 
-              <span className={cn('hidden sm:inline-block')}>
+              <span
+                className={cn(
+                  'transition-all',
+                  isToggled ? 'hidden' : 'sm:inline-block '
+                )}
+              >
                 {group.groupName}
               </span>
             </div>

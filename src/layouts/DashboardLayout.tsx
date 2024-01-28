@@ -1,3 +1,5 @@
+import { useAppSelector } from '@/hooks/useRedux';
+import { cn } from '@/lib/utils';
 import AsideNavigation from '@/pages/dashboard/_components/AsideNavigation';
 import TopHeaderRightOptions from '@/pages/dashboard/_components/TopHeaderRightOptions';
 import React from 'react';
@@ -7,6 +9,8 @@ type TLayout = {
 };
 
 const DashboardLayout = ({ children }: TLayout) => {
+  const { isToggled } = useAppSelector((state) => state.sidenav);
+
   return (
     <div className='flex flex-col min-h-screen'>
       <header className='flex fixed top-0 right-0 left-0 z-30 justify-between items-center h-[58px] bg-zinc-800 border-b border-zinc-700'>
@@ -18,7 +22,12 @@ const DashboardLayout = ({ children }: TLayout) => {
       </header>
       <div className='flex flex-1'>
         <AsideNavigation />
-        <main className='bg-background ml-[56px] sm:ml-[207px] pt-[58px] text-foreground overflow-auto flex-1'>
+        <main
+          className={cn(
+            'bg-background ml-[56px]  pt-[58px] text-foreground transition-all overflow-auto flex-1',
+            !isToggled && 'sm:ml-[207px]'
+          )}
+        >
           {children}
         </main>
       </div>

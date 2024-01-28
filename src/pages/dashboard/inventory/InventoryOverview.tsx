@@ -22,10 +22,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  columns,
-  Inventory,
-} from '../_components/DTInventoryManagementColumns';
+import { columns, Inventory } from '../_components/DTInventoryOverviewColumns';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
 import {
@@ -40,8 +37,9 @@ import {
 import useSearchInventories from '@/hooks/requests/useSearchInventories';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
-const InventoryManagement = () => {
+const InventoryOverview = () => {
   const [layoutType, setLayoutType] = React.useState('grid');
   const { data, error: errorInventory, isLoading } = useSearchInventories();
 
@@ -59,7 +57,7 @@ const InventoryManagement = () => {
       <div className='px-4 py-4 h-full flex flex-col gap-4'>
         <Card>
           <CardHeader className='flex py-3 pb-4 flex-row justify-between items-center'>
-            <CardTitle>Inventory management</CardTitle>
+            <CardTitle>Inventory overview</CardTitle>
             <div className='flex items-center gap-2'>
               <form className='flex items-center'>
                 <Input
@@ -102,34 +100,45 @@ const InventoryManagement = () => {
           <>
             {layoutType === 'grid' ? (
               <div className='grid grid-cols-3 gap-2'>
-                {data.map((item: Inventory) => (
-                  <div
-                    key={item.id}
-                    className='bg-white dark:bg-secondary border p-4 flex flex-col gap-1'
-                  >
-                    <div className='flex justify-between gap-2 pb-3 border-b'>
-                      <div className='flex gap-4'>
-                        {/* <div className='w-10 h-10 flex items-center justify-center border border-primary/60 bg-primary/10'> */}
-                        <Box size={25} className='text-primary' />
-                        {/* </div> */}
-                        <div className='space-y-1'>
-                          <h3 className='text-xl'>{item.name}</h3>
-                          <span className='opacity-70 flex items-center gap-1 text-xs'>
-                            <Hash size={15} /> {item.reference}
-                          </span>
-                          <span className='opacity-70 flex items-center gap-1 text-xs'>
-                            <MapPin size={15} /> {item.address}
-                          </span>
-                        </div>
-                      </div>
-                      {/* <div> */}
-                      <Button variant='ghost'>
-                        <MoreHorizontal size={21} />
+                {data.length === 0 ? (
+                  <div className='bg-white dark:bg-secondary border p-4 py-8 flex flex-col justify-center items-center gap-3'>
+                    <p>No inventory available yet</p>
+                    <Link to='/inventory/create'>
+                      <Button>
+                        <Plus size={21} className='mr-2' />
+                        Create an inventory
                       </Button>
-                      {/* </div> */}
-                    </div>
+                    </Link>
+                  </div>
+                ) : (
+                  data.map((item: Inventory) => (
+                    <div
+                      key={item.id}
+                      className='bg-white dark:bg-secondary border p-4 flex flex-col gap-1'
+                    >
+                      <div className='flex justify-between gap-2 pb-3 border-b'>
+                        <div className='flex gap-4'>
+                          {/* <div className='w-10 h-10 flex items-center justify-center border border-primary/60 bg-primary/10'> */}
+                          <Box size={25} className='text-primary' />
+                          {/* </div> */}
+                          <div className='space-y-1'>
+                            <h3 className='text-xl'>{item.name}</h3>
+                            <span className='opacity-70 flex items-center gap-1 text-xs'>
+                              <Hash size={15} /> {item.reference}
+                            </span>
+                            <span className='opacity-70 flex items-center gap-1 text-xs'>
+                              <MapPin size={15} /> {item.address}
+                            </span>
+                          </div>
+                        </div>
+                        {/* <div> */}
+                        <Button variant='ghost' size='icon'>
+                          <MoreHorizontal size={21} />
+                        </Button>
+                        {/* </div> */}
+                      </div>
 
-                    {/* <div>
+                      {/* <div>
                     <span className='opacity-70 text-sm'>
                       #{item.reference}
                     </span>
@@ -138,22 +147,23 @@ const InventoryManagement = () => {
                       {item.address}
                     </span>
                   </div> */}
-                    <div className='flex my-2 items-center justify-between'>
-                      <span>
-                        <b className='text-2xl'>35</b>
-                        <span className='opacity-50 dark:opacity-45'>
-                          {' '}
-                          articles
+                      <div className='flex my-2 items-center justify-between'>
+                        <span>
+                          <b className='text-2xl'>35</b>
+                          <span className='opacity-50 dark:opacity-45'>
+                            {' '}
+                            articles
+                          </span>
                         </span>
-                      </span>
-                      <Badge variant='destructive'>Out of stock</Badge>
+                        <Badge variant='destructive'>Out of stock</Badge>
+                      </div>
+                      <p className='text-xs p-2 border bg-accent'>
+                        {item.description ||
+                          'No description provided for this inventory'}
+                      </p>
                     </div>
-                    <p className='text-xs p-2 border bg-accent'>
-                      {item.description ||
-                        'No description provided for this inventory'}
-                    </p>
-                  </div>
-                ))}
+                  ))
+                )}
               </div>
             ) : (
               <div className='bg-white dark:bg-secondary'>
@@ -167,4 +177,4 @@ const InventoryManagement = () => {
   );
 };
 
-export default InventoryManagement;
+export default InventoryOverview;

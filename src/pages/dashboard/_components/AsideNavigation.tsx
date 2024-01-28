@@ -58,26 +58,26 @@ const AsideNavigation = () => {
         },
       ],
     },
-    {
-      groupName: 'Customers',
-      groupIcon: <Users size={20} />,
-      groupLink: null,
-      groupLinkIsActive: currentPath.startsWith('/customer'),
-      groupLinks: [
-        {
-          to: '/customer/list',
-          text: 'Customers list',
-          linkIcon: <List size={20} />,
-          isActive: currentPath.startsWith('/customer/list'),
-        },
-        {
-          to: '/customer/new',
-          text: 'Add a customer',
-          linkIcon: <UserPlus size={20} />,
-          isActive: currentPath.startsWith('/customer/create'),
-        },
-      ],
-    },
+    // {
+    //   groupName: 'Customers',
+    //   groupIcon: <Users size={20} />,
+    //   groupLink: null,
+    //   groupLinkIsActive: currentPath.startsWith('/customer'),
+    //   groupLinks: [
+    //     {
+    //       to: '/customer/list',
+    //       text: 'Customers list',
+    //       linkIcon: <List size={20} />,
+    //       isActive: currentPath.startsWith('/customer/list'),
+    //     },
+    //     {
+    //       to: '/customer/new',
+    //       text: 'Add a customer',
+    //       linkIcon: <UserPlus size={20} />,
+    //       isActive: currentPath.startsWith('/customer/create'),
+    //     },
+    //   ],
+    // },
     {
       groupName: 'Articles',
       groupIcon: <BookOpenText size={20} />,

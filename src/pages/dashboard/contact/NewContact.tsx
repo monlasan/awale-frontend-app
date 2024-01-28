@@ -33,6 +33,7 @@ import { Loader, Save } from 'lucide-react';
 import { generateRandomPassword } from '@/lib/utils';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import authService from '@/services/http/auth.service';
+import userService from '@/services/http/user.service';
 
 const formSchema = z.object({
   first_name: z.string().min(1, 'Please enter a first name'),
@@ -42,7 +43,7 @@ const formSchema = z.object({
   phone_number: z.string({
     required_error: 'Please enter a phone number',
   }),
-  role: z.enum(['ADMIN', 'PROVIDER', 'CONSTRUCTOR', 'COMMERCIAL'], {
+  role: z.enum(['ADMIN', 'PROVIDER', 'CONSTRUCTOR', 'CLIENT', 'COMMERCIAL'], {
     required_error: 'Please select a role.',
   }),
 });
@@ -65,18 +66,29 @@ const NewContact = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     try {
-      const password = generateRandomPassword();
-      const group = values.role !== 'ADMIN' ? 'COLLABORATORS' : 'ADMINS';
-      await authService.registerContact({
-        ...values,
-        password,
-        group,
-        avatar_url:
-          'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
-      });
-      toast.success(
-        'Contact created successfully :::: HERE IS THE PASSWORD: ' + password
-      );
+      if (values.role === 'CLIENT') {
+        await userService.createClient({
+          ...values,
+          billing_address: 'SECRET ADDRESS DELIVERY',
+          delivery_address: 'SECRET ADDRESS DELIVERY',
+          avatar_url:
+            'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
+        });
+        toast.success('Client created successfully');
+      } else {
+        const password = generateRandomPassword();
+        const group = values.role !== 'ADMIN' ? 'COLLABORATORS' : 'ADMINS';
+        await authService.registerContact({
+          ...values,
+          password,
+          group,
+          avatar_url:
+            'https://sm.ign.com/ign_fr/cover/a/avatar-gen/avatar-generations_bssq.jpg',
+        });
+        toast.success(
+          'Contact created successfully :::: HERE IS THE PASSWORD: ' + password
+        );
+      }
       form.reset();
       setLoading(false);
     } catch (err: String | any) {
@@ -144,6 +156,14 @@ const NewContact = () => {
                             </FormControl>
                             <FormLabel className='font-normal'>
                               Constructor
+                            </FormLabel>
+                          </FormItem>
+                          <FormItem className='flex items-center space-x-3 space-y-0'>
+                            <FormControl>
+                              <RadioGroupItem value='CLIENT' />
+                            </FormControl>
+                            <FormLabel className='font-normal'>
+                              Client
                             </FormLabel>
                           </FormItem>
                           <FormItem className='flex items-center space-x-3 space-y-0'>

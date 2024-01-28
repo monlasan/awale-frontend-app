@@ -247,24 +247,28 @@ const PurchaseDocument = () => {
                     <span className='text-sm font-medium'>---</span>
                   </div>
                 </div>
-                <div className='flex flex-1 dark:bg-secondary bg-accent/40 min-w-[254px] flex-col py-4 px-4  gap-1 outline outline-1 outline-border'>
-                  <div>
-                    <span className='text-xs opacity-60'>Total amount</span>
-                    <br />
-                    <span className='text-sm font-medium'>319.15</span>
-                  </div>
-                  <div>
-                    <span className='text-xs opacity-60'>Amount paid</span>
-                    <br />
-                    <span className='text-sm font-medium'>0.00</span>
-                  </div>
-                  <div>
-                    <span className='text-xs opacity-60'>Balance due</span>
-                    <br />
-                    <span className='text-2xl font-bold'>319.15</span>
-                    <div className='bg-accent text-sm p-1 px-2 border  w-fit'>
-                      Due Date: 06/9/2018
+                <div className='flex flex-1 dark:bg-secondary bg-accent/40 min-w-[254px] flex-col py-4 px-4 gap-3 outline outline-1 outline-border'>
+                  <div className='flex flex-wrap gap-8'>
+                    <div className='flex flex-col gap-1'>
+                      <div>
+                        <span className='text-xs opacity-60'>Total amount</span>
+                        <br />
+                        <span className='text-sm font-medium'>319.15</span>
+                      </div>
+                      <div>
+                        <span className='text-xs opacity-60'>Amount paid</span>
+                        <br />
+                        <span className='text-sm font-medium'>0.00</span>
+                      </div>
                     </div>
+                    <div>
+                      <span className='text-xs opacity-60'>Balance due</span>
+                      <br />
+                      <span className='text-2xl font-bold'>319.15</span>
+                    </div>
+                  </div>
+                  <div className='bg-accent text-sm p-1 px-2 border  w-fit'>
+                    Due Date: 06/9/2018
                   </div>
                 </div>
               </div>

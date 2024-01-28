@@ -12,7 +12,7 @@ import DashboardLayout from '@/layouts/DashboardLayout';
 const Dashboard = () => {
   return (
     <DashboardLayout>
-      <div className='flex h-full'>
+      <div className='px-14 py-4 h-full flex flex-col'>
         <div className='flex-1 px-4 py-3'>
           <h2 className='text-2xl font-semibold'>Dashboard</h2>
           <Card className='mt-3'>

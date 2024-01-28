@@ -45,15 +45,17 @@ const ArticleList = () => {
   if (error) {
     return (
       <DashboardLayout>
-        <div className='p-8 rounded-lg border-destructive border m-8 bg-destructive text-destructive-foreground'>
-          <p>Something went wrong !</p>
+        <div className='px-14 py-4 h-full flex flex-col'>
+          <div className='p-8 border-destructive border bg-destructive text-destructive-foreground'>
+            <p>Something went wrong !</p>
+          </div>
         </div>
       </DashboardLayout>
     );
   }
   return (
     <DashboardLayout>
-      <div className='px-4 py-4 h-full flex flex-col '>
+      <div className='px-14 py-4 h-full flex flex-col'>
         <Card>
           <CardHeader className='flex py-3 pb-3 flex-row justify-between items-center'>
             <CardTitle>Articles list</CardTitle>

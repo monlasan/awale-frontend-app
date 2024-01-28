@@ -82,7 +82,7 @@ const NewArticle = () => {
 
   return (
     <DashboardLayout>
-      <div className='px-4 py-4 max-w-2xl h-full flex flex-col '>
+      <div className='px-14 py-4 h-full flex flex-col max-w-2xl'>
         <Card>
           <CardHeader className='flex py-3 pb-4 flex-row justify-between items-center'>
             <div>

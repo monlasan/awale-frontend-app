@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -89,11 +90,9 @@ export const columns: ColumnDef<Purchase>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(purchaseDocument.id)}
-            >
-              Voir les détails
-            </DropdownMenuItem>
+            <Link to={'/purchase/document/' + purchaseDocument.id}>
+              <DropdownMenuItem>Voir les détails</DropdownMenuItem>
+            </Link>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(purchaseDocument.id)}
             >

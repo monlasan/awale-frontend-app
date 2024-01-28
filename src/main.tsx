@@ -9,6 +9,7 @@ import App from './App.tsx';
 import './index.css';
 import { SWRConfig } from 'swr';
 import { toast } from 'sonner';
+import { LocalStorage } from './lib/utils.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
@@ -18,6 +19,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         value={{
           onError: (error, key) => {
             if (error.status !== 403 && error.status !== 404) {
+              if (error === 'jwt expired') {
+                LocalStorage.clear();
+                window.location.reload();
+              }
               // We can send the error to Sentry,
               // or show a notification UI.
               // console.log('EEROR', error);

@@ -41,7 +41,7 @@ const SaleList = () => {
 
   return (
     <DashboardLayout>
-      <div className='px-4 py-4 h-full flex flex-col '>
+      <div className='px-14 py-4 h-full flex flex-col'>
         <Card>
           <CardHeader className='flex py-3 pb-3 flex-row justify-between items-center'>
             <CardTitle>Documents de vente</CardTitle>

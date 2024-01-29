@@ -45,10 +45,15 @@ import {
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { useParams } from 'react-router-dom';
+import DocumentClientsListSearch from '../_components/DocumentClientsListSearch';
+import { purchaseDocumentClientAtom } from '@/atoms/purchaseDocument.atom';
+import { useAtom } from 'jotai';
+import DocumentClientsSearchSheet from '../_components/DocumentClientsSearchSheet';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import DocumentClientInfosBox from '../_components/DocumentClientInfosBox';
 
 const PurchaseDocument = () => {
+  const [client, setClient] = useAtom(purchaseDocumentClientAtom);
   let { documentId } = useParams();
   console.log('DOCUMENT ID', documentId);
 
@@ -74,10 +79,6 @@ const PurchaseDocument = () => {
       updated_at: '2022-02-01',
     },
   ];
-
-  const handleClientPickClose = (clientInfos: string): void => {
-    console.log('CLIENT INFOS', clientInfos);
-  };
 
   return (
     <DashboardLayout>
@@ -161,92 +162,7 @@ const PurchaseDocument = () => {
                     </span>
                   </div>
                 </div>
-                <div className='flex flex-1 dark:bg-secondary bg-accent/40 min-w-[254px] flex-col py-4 px-4 gap-1 outline outline-1 outline-border'>
-                  <div>
-                    <span className='text-xs opacity-60'>Client</span>
-                    <br />
-                    {/* <span className='text-sm font-medium'>#FLD-8AZ7D6</span> */}
-
-                    <Sheet>
-                      <SheetTrigger asChild>
-                        <Button size='sm' variant='dark'>
-                          <User className='mr-2' size={20} />
-                          Add a client
-                        </Button>
-                      </SheetTrigger>
-                      <SheetContent>
-                        <SheetHeader className='mb-2'>
-                          <SheetTitle>Add a client</SheetTitle>
-                          <form>
-                            <Input placeholder='Search a user' />
-                          </form>
-                        </SheetHeader>
-                        <ScrollArea className='h-full'>
-                          <div className='flex flex-col gap-2'>
-                            <div className='p-3 flex justify-center items-center gap-3 border bg-secondary'>
-                              <span className='opacity-60'>No entry</span>
-                            </div>
-                            {[
-                              1, 2, 3, 4, 5, 11, 22, 33, 44, 55, 111, 222, 333,
-                              444, 555, 666,
-                            ].map((client) => (
-                              <div
-                                key={client}
-                                className='p-3 flex items-center gap-3 border bg-secondary'
-                              >
-                                <Avatar>
-                                  {/* {avatar_url.length > 0 && ( */}
-                                  <AvatarImage
-                                    src='https://via.placeholder.com/200x200.png'
-                                    alt={'@'}
-                                  />
-                                  {/* )} */}
-                                  <AvatarFallback className='text-black dark:text-zinc-200'>
-                                    CL
-                                    {/* {fullName.split(' ')[0][0]} */}
-                                    {/* {fullName.split(' ')[1][0]} */}
-                                  </AvatarFallback>
-                                </Avatar>
-                                <div className='flex flex-1 flex-col'>
-                                  <b>N'TIA Theodule</b>
-                                  <span className='opacity-70'>
-                                    +299 61640292
-                                  </span>
-                                </div>
-                                <SheetClose asChild>
-                                  <Button
-                                    size='icon'
-                                    onClick={() =>
-                                      handleClientPickClose('clientInfos')
-                                    }
-                                  >
-                                    <Check size={21} />
-                                  </Button>
-                                </SheetClose>
-                              </div>
-                            ))}
-                          </div>
-                        </ScrollArea>
-                      </SheetContent>
-                    </Sheet>
-                    {/* <div className='flex items-center gap-3'>
-                      <span className='text-sm font-medium'>
-                        Laurent GBAGBO
-                      </span>
-                      <button className='text-primary'>
-                        <PenLine size={19} />
-                      </button>
-                    </div> */}
-                  </div>
-                  <div>
-                    <span className='text-xs opacity-60'>Delivery Address</span>
-                    <br />
-                    {/* <span className='text-sm font-medium'>
-                      C/299 ENANGON COTONOU Rue 1
-                    </span> */}
-                    <span className='text-sm font-medium'>---</span>
-                  </div>
-                </div>
+                <DocumentClientInfosBox client={client} />
                 <div className='flex flex-1 dark:bg-secondary bg-accent/40 min-w-[254px] flex-col py-4 px-4 gap-3 outline outline-1 outline-border'>
                   <div className='flex flex-wrap gap-8'>
                     <div className='flex flex-col gap-1'>

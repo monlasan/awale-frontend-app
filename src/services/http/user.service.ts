@@ -10,7 +10,7 @@ class UserService {
     }
   }
 
-  // CONTACT
+  // Client
   async createClient(data: any) {
     try {
       const response = await api.post('/user/client/create', {
@@ -23,6 +23,15 @@ class UserService {
         billing_address: data.billing_address,
         delivery_address: data.delivery_address,
       });
+      return response.data.data;
+    } catch (error: any) {
+      throw error.response?.data.message || error.message;
+    }
+  }
+
+  async searchClients(data = {}) {
+    try {
+      const response = await api.post('/user/client/search', data);
       return response.data.data;
     } catch (error: any) {
       throw error.response?.data.message || error.message;

@@ -73,14 +73,14 @@ const PurchaseList = () => {
       <div className='px-14 py-4 h-full flex flex-col'>
         <Card>
           <CardHeader className='flex p-3 px-6 flex-row justify-between items-center'>
-            <CardTitle>Contacts list</CardTitle>
+            <CardTitle>Purchase documents</CardTitle>
           </CardHeader>
 
           {/* <CardContent>
             <DataTable columns={columns} data={data} />
           </CardContent> */}
         </Card>
-        <div className='grid gap-4 p-6 bg-zinc-400/10 border-l border-r border-b mb-4'>
+        <div className='grid gap-4 p-6 bg-white dark:bg-secondary border-l border-r border-b mb-4'>
           <div className='grid grid-cols-2 gap-4 gap-y-1 flex-1'>
             <div>
               <Label htmlFor='fullName'>Name</Label>

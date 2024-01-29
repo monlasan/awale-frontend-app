@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: TLayout) => {
         <AsideNavigation />
         <main
           className={cn(
-            'bg-background ml-[56px]  pt-[58px] text-foreground transition-all overflow-auto flex-1',
+            'bg-secondary dark:bg-background ml-[56px]  pt-[58px] text-foreground transition-all overflow-auto flex-1',
             !isToggled && 'sm:ml-[207px]'
           )}
         >

@@ -79,7 +79,7 @@ const ContactList = () => {
             <DataTable columns={columns} data={data} />
           </CardContent> */}
         </Card>
-        <div className='grid gap-4 p-6 bg-secondary border-l border-r border-b mb-4'>
+        <div className='grid gap-4 p-6 bg-white dark:bg-secondary border-l border-r border-b mb-4'>
           <div className='grid grid-cols-2 gap-4 gap-y-1 flex-1'>
             <div>
               <Label htmlFor='fullName'>Name</Label>

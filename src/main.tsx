@@ -19,14 +19,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         value={{
           onError: (error, key) => {
             if (error.status !== 403 && error.status !== 404) {
+              let errorTxt = error;
               if (error === 'jwt expired') {
                 LocalStorage.clear();
                 window.location.reload();
               }
+
               // We can send the error to Sentry,
               // or show a notification UI.
-              // console.log('EEROR', error);
-              toast.error(error);
+              toast.error(errorTxt);
             }
           },
         }}

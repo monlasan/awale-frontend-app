@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import { formatDate, formatOption } from '@/lib/utils';
+import { document_type, purchase_bill_state } from '@/lib/constants';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -18,9 +20,8 @@ export type Purchase = {
   id: string;
   reference: string;
   type: string;
-  provider_fullname: string;
-  amount: number;
-  state: 'inWritting' | 'isCompleted';
+  articles_price: number;
+  status: 'IN_WRITTING' | 'IS_COMPLETED';
   created_at: string;
   updated_at: string;
 };
@@ -32,10 +33,16 @@ export const columns: ColumnDef<Purchase>[] = [
   },
   {
     accessorKey: 'type',
-    header: 'Type de document',
+    header: 'Document',
+    cell: ({ row }) => {
+      const type: string = row.getValue('type');
+      return (
+        <Badge variant='outline'>{formatOption(type, document_type)}</Badge>
+      );
+    },
   },
   {
-    accessorKey: 'state',
+    accessorKey: 'status',
     header: ({ column }) => {
       return (
         <button
@@ -48,31 +55,45 @@ export const columns: ColumnDef<Purchase>[] = [
       );
     },
     cell: ({ row }) => {
-      const state: string = row.getValue('state');
-      return <Badge variant='secondary'>{state}</Badge>;
-    },
-  },
-  {
-    accessorKey: 'provider_fullname',
-    header: ({ column }) => {
+      const status: string = row.getValue('status');
       return (
-        <button
-          className='flex items-center gap-1'
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          Fournisseur
-          <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
-        </button>
+        <Badge variant='secondary'>
+          {formatOption(status, purchase_bill_state)}
+        </Badge>
       );
     },
   },
+  // {
+  //   accessorKey: 'provider_fullname',
+  //   header: ({ column }) => {
+  //     return (
+  //       <button
+  //         className='flex items-center gap-1'
+  //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+  //       >
+  //         Fournisseur
+  //         <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
+  //       </button>
+  //     );
+  //   },
+  // },
   {
-    accessorKey: 'amount',
-    header: 'Montant',
+    accessorKey: 'articles_price',
+    header: 'Amount',
   },
   {
     accessorKey: 'created_at',
-    header: 'Date de création',
+    header: 'Created at',
+    cell: ({ row }) => {
+      return <time>{formatDate(row.getValue('created_at'))}</time>;
+    },
+  },
+  {
+    accessorKey: 'updated_at',
+    header: 'Last update',
+    cell: ({ row }) => {
+      return <time>{formatDate(row.getValue('updated_at'))}</time>;
+    },
   },
   {
     id: 'actions',

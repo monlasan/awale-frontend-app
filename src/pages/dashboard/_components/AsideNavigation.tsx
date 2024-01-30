@@ -240,9 +240,9 @@ const AsideNavigation = () => {
 
               <span
                 className={cn(
-                  'ml-1 dark:group-hover:opacity-100 transition-all',
+                  'ml-1 hidden dark:group-hover:opacity-100 transition-all',
                   !group.groupLinkIsActive && 'dark:opacity-60',
-                  isToggled ? 'hidden' : 'sm:inline-block '
+                  !isToggled && 'sm:inline-block '
                 )}
               >
                 {group.groupName}
@@ -268,8 +268,8 @@ const AsideNavigation = () => {
 
               <span
                 className={cn(
-                  'transition-all',
-                  isToggled ? 'hidden' : 'sm:inline-block '
+                  'transition-all hidden',
+                  !isToggled && 'sm:inline-block '
                 )}
               >
                 {group.groupName}

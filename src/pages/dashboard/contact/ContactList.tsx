@@ -26,6 +26,7 @@ import {
 } from '@/components/ui/select';
 import useSearchContacts from '@/hooks/requests/useSearchContacts';
 import { Link } from 'react-router-dom';
+import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
 
 const ContactList = () => {
   const { data, error, isLoading } = useSearchContacts();
@@ -52,15 +53,7 @@ const ContactList = () => {
   // ];
 
   if (error) {
-    return (
-      <DashboardLayout>
-        <div className='px-14 py-4 h-full flex flex-col'>
-          <div className='p-8 border-destructive border bg-destructive text-destructive-foreground'>
-            <p>Something went wrong !</p>
-          </div>
-        </div>
-      </DashboardLayout>
-    );
+    return <ErrorDashboardLayout />;
   }
   return (
     <DashboardLayout>

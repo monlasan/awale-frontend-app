@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Edit,
   FileDown,
+  Loader,
   Mail,
   PenLine,
   Plus,
@@ -43,30 +44,15 @@ import {
 } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
+import useSearchPurchaseDocuments from '@/hooks/requests/useSearchPurchaseDocuments';
+import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
 
 const PurchaseList = () => {
-  const data: Purchase[] = [
-    {
-      id: '7a28ed52f',
-      type: 'Facture',
-      reference: 'FAC-728ed52f',
-      provider_fullname: 'Sanny Khaled',
-      amount: 5000,
-      state: 'inWritting',
-      created_at: '2022-01-01',
-      updated_at: '2022-02-01',
-    },
-    {
-      id: '628ed52f',
-      type: 'Facture',
-      reference: 'FAC-728ed52f',
-      provider_fullname: 'Sanny Khaled',
-      amount: 5000,
-      state: 'inWritting',
-      created_at: '2022-01-01',
-      updated_at: '2022-02-01',
-    },
-  ];
+  const { data, error, isLoading } = useSearchPurchaseDocuments();
+
+  if (error) {
+    return <ErrorDashboardLayout />;
+  }
 
   return (
     <DashboardLayout>
@@ -114,9 +100,15 @@ const PurchaseList = () => {
             </Button>
           </div>
         </div>
-        <div className='bg-white dark:bg-secondary'>
-          <DataTable columns={columns} data={data} />
-        </div>
+        {isLoading ? (
+          <div className='flex p-6 justify-center'>
+            <Loader size={30} className='animate-spin' />
+          </div>
+        ) : (
+          <div className='bg-white dark:bg-secondary'>
+            <DataTable columns={columns} data={data} />
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );

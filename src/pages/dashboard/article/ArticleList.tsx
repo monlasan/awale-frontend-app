@@ -25,6 +25,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import useSearchArticles from '@/hooks/requests/useSearchArticles';
+import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
 
 const ArticleList = () => {
   const { data, error, isLoading } = useSearchArticles();
@@ -43,15 +44,7 @@ const ArticleList = () => {
   // ];
 
   if (error) {
-    return (
-      <DashboardLayout>
-        <div className='px-14 py-4 h-full flex flex-col'>
-          <div className='p-8 border-destructive border bg-destructive text-destructive-foreground'>
-            <p>Something went wrong !</p>
-          </div>
-        </div>
-      </DashboardLayout>
-    );
+    return <ErrorDashboardLayout />;
   }
   return (
     <DashboardLayout>

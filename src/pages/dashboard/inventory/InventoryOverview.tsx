@@ -38,21 +38,14 @@ import useSearchInventories from '@/hooks/requests/useSearchInventories';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
+import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
 
 const InventoryOverview = () => {
   const [layoutType, setLayoutType] = React.useState('grid');
   const { data, error: errorInventory, isLoading } = useSearchInventories();
 
   if (errorInventory) {
-    return (
-      <DashboardLayout>
-        <div className='px-14 py-4 h-full flex flex-col'>
-          <div className='p-8 border-destructive border bg-destructive text-destructive-foreground'>
-            <p>Something went wrong !</p>
-          </div>
-        </div>
-      </DashboardLayout>
-    );
+    return <ErrorDashboardLayout />;
   }
   return (
     <DashboardLayout>

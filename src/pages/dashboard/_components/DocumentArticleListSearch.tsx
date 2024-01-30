@@ -4,8 +4,13 @@ import DocumentArticleListSearchItem from './DocumentArticleListSearchItem';
 import useSearchArticles from '@/hooks/requests/useSearchArticles';
 import { columns, Article } from '../_components/DTGroupedArticleListColumns';
 import { DataTable } from '@/components/ui/data-table';
+import { useAtom } from 'jotai';
+import { documentCart, groupedCart } from '@/atoms/documents.atom';
 
 const DocumentArticleListSearch = () => {
+  const [raw_articles_atom, setRawArticlesAtom] = useAtom(documentCart);
+  const [grouped_articles_atom, setGroupedArticles] = useAtom(groupedCart);
+
   const groupedArticles = [
     {
       id: 'gg-444-xZZBOOZAKA-ID-1',
@@ -46,7 +51,7 @@ const DocumentArticleListSearch = () => {
   }
   return (
     <div className='grid grid-cols-2 gap-6'>
-      <ScrollArea className='h-[400px]'>
+      <ScrollArea className='h-full'>
         <div className='flex flex-col mt-4 gap-2'>
           {data && data.length === 0 && (
             <div className='p-3 flex justify-center items-center gap-3 border bg-secondary'>
@@ -67,7 +72,7 @@ const DocumentArticleListSearch = () => {
           <div className='p-3 border border-b-0'>
             <h3 className='text-xl font-bold '>Cart</h3>
           </div>
-          <DataTable columns={columns} data={groupedArticles} />
+          <DataTable columns={columns} data={grouped_articles_atom} />
         </div>
       </ScrollArea>
     </div>

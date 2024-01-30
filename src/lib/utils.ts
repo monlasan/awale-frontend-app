@@ -113,3 +113,42 @@ export function processStatusColor(
   }
   return color;
 }
+
+interface Item {
+  id: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+export function groupItems(items: Item[]) {
+  // TODO: we are manimpulating financial data and money infos here... i should do more research about storing those type of data
+  const groupedItems: any = {};
+
+  for (let i = 0; i < items.length; i++) {
+    const item: Item = items[i];
+    const id = item.id;
+
+    if (!groupedItems.hasOwnProperty(id)) {
+      // Initialize the grouped item if it doesn't exist
+      groupedItems[id] = {
+        id: id,
+        name: item.name,
+        quantity: 0,
+        total_price: 0,
+      };
+    }
+
+    // Update quantity and total price for the item's id
+    groupedItems[id].quantity++;
+    groupedItems[id].total_price += item.price;
+  }
+
+  const result = [];
+  for (const id in groupedItems) {
+    if (groupedItems.hasOwnProperty(id)) {
+      result.push(groupedItems[id]);
+    }
+  }
+
+  return result;
+}

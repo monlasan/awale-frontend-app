@@ -52,14 +52,9 @@ export const columns: ColumnDef<Article>[] = [
         <div className='flex items-center gap-2'>
           <>
             <Avatar>
-              <AvatarImage
-                src={
-                  photo_url && photo_url.length > 0
-                    ? photo_url
-                    : 'https://via.placeholder.com/200x200.png'
-                }
-                alt={'@' + name}
-              />
+              {photo_url && photo_url.length > 0 && (
+                <AvatarImage src={photo_url} alt={'#' + name} />
+              )}
               <AvatarFallback className='text-black uppercase dark:text-zinc-200'>
                 {name[0] + '' + name[1]}
               </AvatarFallback>

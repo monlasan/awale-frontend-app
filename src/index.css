@@ -72,7 +72,13 @@
   }
   html.dark body {
     background-color: hsl(var(--background));
-    /* background-color: #171717; */
+    /* border-color: hsl(0, 0%, 29%);
+    border-color: hsl(0, 52%, 50%);
+    border-color: hsl(116, 52%, 50%);
+    border-color: hsl(227, 52%, 50%);
+    border-color: hsl(38, 100%, 50%); */
+    /* border-color: hsl(283, 100%, 30%); */
+    /* border-color: hsl(183, 67%, 31%); */
     color: hsl(var(--foreground));
   }
   html *::selection {

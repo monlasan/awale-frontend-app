@@ -56,7 +56,7 @@ import DocumentClientsSearchSheet from '../_components/DocumentClientsSearchShee
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DocumentClientInfosBox from '../_components/DocumentClientInfosBox';
 import useGetDocument from '@/hooks/requests/useGetDocument';
-import { formatDate, formatOption } from '@/lib/utils';
+import { formatDate, formatOption, processStatusColor } from '@/lib/utils';
 import { toast } from 'sonner';
 import { purchase_doc_status } from '@/lib/constants';
 import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
@@ -119,12 +119,26 @@ const PurchaseDocument = () => {
         </div> */}
         <div className='isolate relative mb-20'>
           <div className='w-8 h-8 bg-black rotate-45 -z-10 absolute top-0 left-0 translate-y-[49px] -translate-x-[16px]'>
-            <div className='w-8 h-8 bg-orange-400/50 z-10'></div>
+            <div
+              style={{
+                backgroundColor: `hsla(${processStatusColor(
+                  documentData.status
+                )}, 0.6)`,
+              }}
+              className='w-8 h-8 z-10'
+            ></div>
           </div>
           <div className='p-4 shadow border bg-white dark:bg-accent min-w-[372px]'>
             <div className='flex items-center flex-wrap gap-4 justify-between pr-6'>
               <div className='w-fit flex  items-center gap-4 -translate-x-10'>
-                <div className='bg-orange-400  text-white p-3 px-4 whitespace-nowrap'>
+                <div
+                  style={{
+                    backgroundColor: `hsla(${processStatusColor(
+                      documentData.status
+                    )})`,
+                  }}
+                  className='text-white p-3 px-4 whitespace-nowrap'
+                >
                   Status{' : '}
                   {documentData.type === 'QUOTE' && (
                     <b className='uppercase'>

@@ -70,3 +70,46 @@ export function formatDate(date: string) {
     day: 'numeric',
   });
 }
+
+export function processStatusColor(
+  status:
+    | 'IN_WRITTING'
+    | 'IS_READY'
+    | 'IS_REJECTED'
+    | 'IS_LOCKED'
+    | 'IN_DELIVERY'
+    | 'IN_RECOVERY'
+    | 'IS_VALIDATED'
+    | 'IS_WAITING'
+) {
+  let color = '';
+  switch (status) {
+    case 'IN_WRITTING':
+      color = '38, 100%, 50%';
+      break;
+    case 'IS_READY':
+      color = '227, 52%, 50%';
+      break;
+    case 'IS_REJECTED':
+      color = '0, 52%, 50%';
+      break;
+    case 'IS_LOCKED':
+      color = '0, 0%, 30%';
+      break;
+    case 'IN_DELIVERY':
+      color = '183, 67%, 31%';
+      break;
+    case 'IN_RECOVERY':
+      color = '320, 82%, 40%';
+      break;
+    case 'IS_VALIDATED':
+      color = '116, 32%, 50%';
+      break;
+    case 'IS_WAITING':
+      color = '283, 100%, 30%';
+      break;
+    default:
+      break;
+  }
+  return color;
+}

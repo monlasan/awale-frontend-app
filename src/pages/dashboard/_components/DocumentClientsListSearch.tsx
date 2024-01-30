@@ -6,7 +6,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 const DocumentClientsListSearch = () => {
   const { data, error, isLoading } = useSearchClients();
-  console.log('CLIENT FETCHED', data);
 
   if (error) {
     return (

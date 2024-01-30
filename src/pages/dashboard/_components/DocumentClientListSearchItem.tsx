@@ -7,6 +7,7 @@ import { IClient } from '@/interfaces';
 import folderService from '@/services/http/folder.service';
 import { useAtom } from 'jotai';
 import { Check } from 'lucide-react';
+import { toast } from 'sonner';
 import { mutate } from 'swr';
 
 const DocumentClientListSearchItem = ({ client }: { client: IClient }) => {
@@ -19,6 +20,7 @@ const DocumentClientListSearchItem = ({ client }: { client: IClient }) => {
       clientInfos,
     });
     mutate('get_document');
+    toast.success('Document client updated.');
     setIsUpdating(false);
   };
 

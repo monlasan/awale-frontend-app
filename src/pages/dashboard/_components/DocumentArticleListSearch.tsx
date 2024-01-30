@@ -27,7 +27,6 @@ const DocumentArticleListSearch = () => {
     },
   ];
   const { data, error, isLoading } = useSearchArticles();
-  console.log('ARTICLES FETCHED', data);
 
   if (error) {
     return (

@@ -56,15 +56,22 @@ import DocumentClientsSearchSheet from '../_components/DocumentClientsSearchShee
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import DocumentClientInfosBox from '../_components/DocumentClientInfosBox';
 import useGetDocument from '@/hooks/requests/useGetDocument';
-import { formatDate, formatOption, processStatusColor } from '@/lib/utils';
+import {
+  formatDate,
+  formatOption,
+  formatPrice,
+  processStatusColor,
+} from '@/lib/utils';
 import { toast } from 'sonner';
-import { purchase_doc_status } from '@/lib/constants';
+import { doc_status, purchase_doc_status } from '@/lib/constants';
 import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
 import DocumentArticlesSearchSheet from '../_components/DocumentArticleSearchSheet';
+import { isUpdatingDocumentCart } from '@/atoms/documents.atom';
 
 const PurchaseDocument = () => {
   const navigate = useNavigate();
   const [documentAtom, setDocument] = useAtom(purchaseDocumentAtom);
+  const [isUpdatingCart, setIsUpdatingCart] = useAtom(isUpdatingDocumentCart);
   const [groupedArticles, setGroupedArticles] = useAtom(
     purchaseDocumentArticlesAtom
   );
@@ -117,7 +124,7 @@ const PurchaseDocument = () => {
           </button>
           <Button size='sm'>Add</Button>
         </div> */}
-        <div className='isolate relative mb-20'>
+        <div key={documentId} className='isolate relative mb-20'>
           <div className='w-8 h-8 bg-black rotate-45 -z-10 absolute top-0 left-0 translate-y-[49px] -translate-x-[16px]'>
             <div
               style={{
@@ -140,7 +147,10 @@ const PurchaseDocument = () => {
                   className='text-white p-3 px-4 whitespace-nowrap'
                 >
                   Status{' : '}
-                  {documentData.type === 'QUOTE' && (
+                  <b className='uppercase'>
+                    {formatOption(documentData.status, doc_status)}
+                  </b>
+                  {/* {documentData.type === 'QUOTE' && (
                     <b className='uppercase'>
                       {formatOption(
                         documentData.status,
@@ -171,7 +181,7 @@ const PurchaseDocument = () => {
                         purchase_doc_status.bill
                       )}
                     </b>
-                  )}
+                  )} */}
                   {/* <b>{formatOption(documentData.status, documentData.type)}</b> */}
                 </div>
                 <div className='flex flex-nowrap items-center'>
@@ -254,20 +264,22 @@ const PurchaseDocument = () => {
                         <span className='text-xs opacity-60'>Total amount</span>
                         <br />
                         <span className='text-sm font-medium'>
-                          {documentData.folder.amount}
+                          {formatPrice(documentData.folder.amount)}
                         </span>
                       </div>
                       <div>
                         <span className='text-xs opacity-60'>Amount paid</span>
                         <br />
-                        <span className='text-sm font-medium'>0.00</span>
+                        <span className='text-sm font-medium'>
+                          {formatPrice(0.0)}
+                        </span>
                       </div>
                     </div>
                     <div>
                       <span className='text-xs opacity-60'>Balance due</span>
                       <br />
                       <span className='text-2xl font-bold'>
-                        {documentData.folder.amount - 15}
+                        {formatPrice(documentData.folder.amount - 15)}
                       </span>
                     </div>
                   </div>
@@ -278,15 +290,23 @@ const PurchaseDocument = () => {
               </div>
             </div>
             <div className='py-3 pb-4 px-10 dark:bg-secondary bg-accent/40 border-t border-b -mx-4 flex flex-col gap-3'>
-              <div className='flex items-center justify-between'>
-                <h3 className='text-lg font-medium'>
-                  Articles cart {'(' + groupedArticles.length + ')'}
-                </h3>
-                <DocumentArticlesSearchSheet />
-              </div>
-              <div className='bg-white dark:bg-accent'>
-                <DataTable columns={columns} data={groupedArticles} />
-              </div>
+              {isUpdatingCart ? (
+                <div className='p-6 flex justify-center items-center'>
+                  <Loader className='text-primary animate-spin' size={30} />
+                </div>
+              ) : (
+                <>
+                  <div className='flex items-center justify-between'>
+                    <h3 className='text-lg font-medium'>
+                      Articles cart {'(' + groupedArticles.length + ')'}
+                    </h3>
+                    <DocumentArticlesSearchSheet />
+                  </div>
+                  <div className='bg-white dark:bg-accent'>
+                    <DataTable columns={columns} data={groupedArticles} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

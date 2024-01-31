@@ -19,6 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         value={{
           onError: (error, key) => {
             if (error.status !== 403 && error.status !== 404) {
+              console.log(error);
               let errorTxt = error;
               if (error === 'jwt expired') {
                 LocalStorage.clear();

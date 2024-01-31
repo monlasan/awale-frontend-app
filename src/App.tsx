@@ -21,6 +21,7 @@ import NewArticle from './pages/dashboard/article/NewArticle';
 import InventoryOverview from './pages/dashboard/inventory/InventoryOverview';
 import PurchaseDocument from './pages/dashboard/purchase/PurchaseDocument';
 import PurchaseDocumentNew from './pages/dashboard/purchase/PurchaseDocumentNew';
+import SaleDocumentNew from './pages/dashboard/sale/SaleDocumentNew';
 
 function App() {
   return (
@@ -52,7 +53,7 @@ function App() {
             <Route path='/inventory/overview' element={<InventoryOverview />} />
             {/* PURCHASE & SALE */}
             <Route
-              path='/purchase/document/:documentId'
+              path='/document/:documentId'
               element={<PurchaseDocument />}
             />
             {/* PURCHASE */}
@@ -60,40 +61,42 @@ function App() {
             <Route
               path='/purchase/document/quotation/new'
               element={
-                <PurchaseDocumentNew createDocument='purchase-quotation' />
+                <PurchaseDocumentNew documentToCreate='purchase-quotation' />
               }
             />
             <Route
               path='/purchase/document/delivery/new'
               element={
-                <PurchaseDocumentNew createDocument='purchase-delivery' />
+                <PurchaseDocumentNew documentToCreate='purchase-delivery' />
               }
             />
             <Route
               path='/purchase/document/order/new'
-              element={<PurchaseDocumentNew createDocument='purchase-order' />}
+              element={
+                <PurchaseDocumentNew documentToCreate='purchase-order' />
+              }
             />
             <Route
               path='/purchase/document/bill/new'
-              element={<PurchaseDocumentNew createDocument='purchase-bill' />}
+              element={<PurchaseDocumentNew documentToCreate='purchase-bill' />}
             />
             {/* SALE */}
             <Route path='/sale/list' element={<SaleList />} />
             <Route
               path='/sale/document/quote/new'
-              element={<PurchaseDocumentNew createDocument='sale-quote' />}
+              element={<SaleDocumentNew documentToCreate='sale-quote' />}
             />
             <Route
               path='/sale/document/delivery/new'
-              element={<PurchaseDocumentNew createDocument='sale-delivery' />}
+              element={<SaleDocumentNew documentToCreate='sale-delivery' />}
             />
             <Route
               path='/sale/document/order/new'
-              element={<PurchaseDocumentNew createDocument='sale-order' />}
+              element={<SaleDocumentNew documentToCreate='sale-order' />}
             />
             <Route
               path='/sale/document/bill/new'
-              element={<PurchaseDocumentNew createDocument='sale-bill' />}
+              element={<SaleDocumentNew documentToCreate='sale-bill' />}
             />
           </Route>
           <Route path='*' element={<Notfound />} />

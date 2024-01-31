@@ -11,6 +11,14 @@ class FolderService {
       throw error.response?.data.message || error.message;
     }
   }
+  async updateFolderCart(data: any) {
+    try {
+      const response = await api.put('/folder/update-cart', data);
+      return response.data.data;
+    } catch (error: any) {
+      throw error.response?.data.message || error.message;
+    }
+  }
   // async createFolder(data: any) {
   //   try {
   //     const response = await api.post('/user/folder/create', {

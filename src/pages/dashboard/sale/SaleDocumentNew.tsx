@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { mutate } from 'swr';
 
-const PurchaseDocumentNew = ({
+const SaleDocumentNew = ({
   documentToCreate,
 }: {
   documentToCreate: string;
@@ -19,13 +19,14 @@ const PurchaseDocumentNew = ({
     const documentCreated = await documentService.createDocument({
       type: documentToCreate,
       status: 'IN_WRITTING',
-      transaction: 'PURCHASE',
+      transaction: 'SALE',
       editor_id: currentUser?.user.id,
       client_id: '',
       amount: 0,
       articles_grouped: [],
     });
     toast.success('Document created successfully');
+    // mutate('get_document', null);
     navigate('/document/' + documentCreated.id);
   };
 
@@ -43,4 +44,4 @@ const PurchaseDocumentNew = ({
   );
 };
 
-export default PurchaseDocumentNew;
+export default SaleDocumentNew;

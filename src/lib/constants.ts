@@ -22,8 +22,32 @@ export const purchase_bill_state = [
     value: 'In writting',
   },
   {
-    label: 'IS_COMPLETED',
-    value: 'Commercial',
+    label: 'IS_READY',
+    value: 'Ready',
+  },
+  {
+    label: 'IS_REJECTED',
+    value: 'Canceled',
+  },
+  {
+    label: 'IS_LOCKED',
+    value: 'Locked',
+  },
+  {
+    label: 'IN_DELIVERY',
+    value: 'In delivery',
+  },
+  {
+    label: 'IN_RECOVERY',
+    value: 'In recovery',
+  },
+  {
+    label: 'IS_VALIDATED',
+    value: 'Validated',
+  },
+  {
+    label: 'IS_WAITING',
+    value: 'Is waiting',
   },
 ];
 export const document_type = [
@@ -45,6 +69,10 @@ export const document_type = [
   },
   {
     label: 'QUOTATION',
+    value: 'Quotation',
+  },
+  {
+    label: 'QUOTITY',
     value: 'Quotation',
   },
 ];
@@ -89,7 +117,7 @@ export const sale_doc_status = {
     },
     {
       label: 'IS_READY',
-      value: 'Ready to deliver',
+      value: 'Ready',
     },
     {
       label: 'IS_LOCKED',
@@ -181,3 +209,37 @@ export const purchase_doc_status = {
     },
   ],
 };
+export const doc_status = [
+  {
+    label: 'IN_WRITTING',
+    value: 'In writting',
+  },
+  {
+    label: 'IS_READY',
+    value: 'Ready',
+  },
+  {
+    label: 'IS_REJECTED',
+    value: 'Canceled',
+  },
+  {
+    label: 'IS_LOCKED',
+    value: 'Locked',
+  },
+  {
+    label: 'IN_DELIVERY',
+    value: 'In delivery',
+  },
+  {
+    label: 'IN_RECOVERY',
+    value: 'In recovery',
+  },
+  {
+    label: 'IS_VALIDATED',
+    value: 'Validated',
+  },
+  {
+    label: 'IS_WAITING',
+    value: 'Is waiting',
+  },
+];

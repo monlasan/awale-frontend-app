@@ -70,6 +70,9 @@ export function formatDate(date: string) {
     day: 'numeric',
   });
 }
+export function formatPrice(price: number) {
+  return price + ' €';
+}
 
 export function processStatusColor(
   status:

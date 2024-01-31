@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
 import { Link } from 'react-router-dom';
-import { formatDate, formatOption } from '@/lib/utils';
+import { formatDate, formatOption, formatPrice } from '@/lib/utils';
 import { document_type, purchase_bill_state } from '@/lib/constants';
 
 // This type is used to define the shape of our data.
@@ -21,7 +21,7 @@ export type Purchase = {
   reference: string;
   type: string;
   articles_price: number;
-  status: 'IN_WRITTING' | 'IS_COMPLETED';
+  status: any;
   created_at: string;
   updated_at: string;
 };
@@ -49,7 +49,7 @@ export const columns: ColumnDef<Purchase>[] = [
           className='flex items-center gap-1'
           onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
-          État
+          Status
           <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
         </button>
       );
@@ -63,23 +63,12 @@ export const columns: ColumnDef<Purchase>[] = [
       );
     },
   },
-  // {
-  //   accessorKey: 'provider_fullname',
-  //   header: ({ column }) => {
-  //     return (
-  //       <button
-  //         className='flex items-center gap-1'
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-  //       >
-  //         Fournisseur
-  //         <ArrowUpDown className='ml-2 h-4 w-4 text-primary' />
-  //       </button>
-  //     );
-  //   },
-  // },
   {
     accessorKey: 'articles_price',
     header: 'Amount',
+    cell: ({ row }) => {
+      return <span>{formatPrice(row.getValue('articles_price'))}</span>;
+    },
   },
   {
     accessorKey: 'created_at',
@@ -111,7 +100,7 @@ export const columns: ColumnDef<Purchase>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <Link to={'/purchase/document/' + purchaseDocument.id}>
+            <Link to={'/document/' + purchaseDocument.id}>
               <DropdownMenuItem>Voir les détails</DropdownMenuItem>
             </Link>
             <DropdownMenuItem

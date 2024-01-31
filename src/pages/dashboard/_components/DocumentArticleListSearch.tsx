@@ -2,35 +2,17 @@ import { Loader } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import DocumentArticleListSearchItem from './DocumentArticleListSearchItem';
 import useSearchArticles from '@/hooks/requests/useSearchArticles';
-import { columns, Article } from '../_components/DTGroupedArticleListColumns';
+import {
+  columns,
+  Article,
+} from '../_components/DTCartGroupedArticleListColumns';
 import { DataTable } from '@/components/ui/data-table';
 import { useAtom } from 'jotai';
 import { documentCart, groupedCart } from '@/atoms/documents.atom';
 
 const DocumentArticleListSearch = () => {
-  const [raw_articles_atom, setRawArticlesAtom] = useAtom(documentCart);
   const [grouped_articles_atom, setGroupedArticles] = useAtom(groupedCart);
 
-  const groupedArticles = [
-    {
-      id: 'gg-444-xZZBOOZAKA-ID-1',
-      name: 'xZZBOOZAKA',
-      quantity: 2,
-      total_price: 120,
-    },
-    {
-      id: 'gg-444-xZZLOOME-ID-2',
-      name: 'xZZKLOOME',
-      quantity: 1,
-      total_price: 19.99,
-    },
-    {
-      id: 'gg-444-ZZLOOME-ID-2',
-      name: 'xZZKLOOME',
-      quantity: 1,
-      total_price: 19.99,
-    },
-  ];
   const { data, error, isLoading } = useSearchArticles();
 
   if (error) {

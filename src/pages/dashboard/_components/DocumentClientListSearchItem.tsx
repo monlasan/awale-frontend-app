@@ -12,16 +12,18 @@ import { mutate } from 'swr';
 
 const DocumentClientListSearchItem = ({ client }: { client: IClient }) => {
   const [atomDocument, setAtomDocument] = useAtom(purchaseDocumentAtom);
-  const [isUpdating, setIsUpdating] = useAtom(isUpdatingDocumentClient);
+  const [isUpdatingClient, setIsUpdatingClient] = useAtom(
+    isUpdatingDocumentClient
+  );
   const handleClientPickClose = async (clientInfos: IClient) => {
-    setIsUpdating(true);
+    setIsUpdatingClient(true);
     await folderService.updateFolderClient({
       folderId: atomDocument.folder.id,
       clientInfos,
     });
     mutate('get_document');
     toast.success('Document client updated.');
-    setIsUpdating(false);
+    setIsUpdatingClient(false);
   };
 
   return (

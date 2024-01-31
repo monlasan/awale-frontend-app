@@ -1,5 +1,15 @@
 import React from 'react';
-import { Plus, Search } from 'lucide-react';
+import {
+  Edit,
+  FileDown,
+  Loader,
+  Mail,
+  PenLine,
+  Plus,
+  Search,
+  Trash2,
+  User,
+} from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { DataTable } from '@/components/ui/data-table';
@@ -12,6 +22,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import { columns, Sale } from '../_components/DTSaleListColumns';
 import DashboardLayout from '@/layouts/DashboardLayout';
 
@@ -24,27 +42,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { Link } from 'react-router-dom';
+import useSearchSaleDocuments from '@/hooks/requests/useSearchSaleDocuments';
+import ErrorDashboardLayout from '@/layouts/ErrorDashboardLayout';
 
 const SaleList = () => {
-  const data: Sale[] = [
-    {
-      id: '728ed52f',
-      type: 'Facture',
-      reference: 'FAC-728ed52f',
-      client_fullname: 'Sanny Khaled',
-      amount: 5000,
-      state: 'inWritting',
-      created_at: '2022-01-01',
-      updated_at: '2022-02-01',
-    },
-  ];
+  const { data, error, isLoading } = useSearchSaleDocuments();
+
+  if (error) {
+    return <ErrorDashboardLayout />;
+  }
 
   return (
     <DashboardLayout>
       <div className='px-14 py-4 h-full flex flex-col'>
         <Card>
-          <CardHeader className='flex py-3 pb-3 flex-row justify-between items-center'>
-            <CardTitle>Purchase documents</CardTitle>
+          <CardHeader className='flex p-3 px-6 flex-row justify-between items-center'>
+            <CardTitle>Sale documents</CardTitle>
           </CardHeader>
 
           {/* <CardContent>
@@ -52,44 +67,48 @@ const SaleList = () => {
           </CardContent> */}
         </Card>
         <div className='grid gap-4 p-6 bg-white dark:bg-secondary border-l border-r border-b mb-4'>
-          {/* <div className='grid grid-cols-2 gap-4 gap-y-1 flex-1'>
+          <div className='grid grid-cols-2 gap-4 gap-y-1 flex-1'>
             <div>
-              <Label htmlFor='fullName'>Nom/Prénoms</Label>
+              <Label htmlFor='fullName'>Name</Label>
               <Input
                 type='fullName'
                 id='fullName'
-                placeholder='Rechercher par nom/prénoms'
+                placeholder='Search by name'
               />
             </div>
             <div>
               <Label htmlFor='role'>Roles</Label>
               <Select>
                 <SelectTrigger id='role'>
-                  <SelectValue placeholder='Sélectionner un role' />
+                  <SelectValue placeholder='Select a role' />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
-                    <SelectItem value='admin'>Administrateur</SelectItem>
-                    <SelectItem value='collaborator'>Collaborateur</SelectItem>
-                    <SelectItem value='client'>Client</SelectItem>
-                    <SelectItem value='provider'>Fournisseur</SelectItem>
-                    <SelectItem value='commercial'>Commercial</SelectItem>
-                    <SelectItem value='constructor'>Constructeur</SelectItem>
+                    <SelectItem value='ADMIN'>Administratorr</SelectItem>
+                    <SelectItem value='COMMERCIAL'>Commercial</SelectItem>
+                    <SelectItem value='PROVIDER'>Provider</SelectItem>
+                    <SelectItem value='CONSTRUCTOR'>Constructor</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
-          </div> */}
+          </div>
           <div>
             <Button>
               <Search size={20} className='mr-2' />
-              Rechercher
+              Search
             </Button>
           </div>
         </div>
-        <div className='bg-white dark:bg-secondary'>
-          <DataTable columns={columns} data={data} />
-        </div>
+        {isLoading ? (
+          <div className='flex p-6 justify-center'>
+            <Loader size={30} className='animate-spin' />
+          </div>
+        ) : (
+          <div className='bg-white dark:bg-secondary'>
+            <DataTable columns={columns} data={data} />
+          </div>
+        )}
       </div>
     </DashboardLayout>
   );

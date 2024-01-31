@@ -7,6 +7,7 @@ import { SheetClose } from '@/components/ui/sheet';
 import { useAtom } from 'jotai';
 import { Check, Minus, Plus } from 'lucide-react';
 import { documentCart, groupedCart } from '@/atoms/documents.atom';
+import { formatPrice } from '@/lib/utils';
 
 const DocumentArticleListSearchItem = ({ article }: { article: any }) => {
   const [raw_articles_atom, setRawArticlesAtom] = useAtom(documentCart);
@@ -50,7 +51,7 @@ const DocumentArticleListSearchItem = ({ article }: { article: any }) => {
       </Avatar>
       <div className='flex flex-1 flex-col'>
         <b>{article.name}</b>
-        <span className='opacity-70'>{article.price}</span>
+        <span className='opacity-70'>{formatPrice(article.price)}</span>
       </div>
       <div className='flex items-center'>
         <Button
@@ -81,14 +82,14 @@ const DocumentArticleListSearchItem = ({ article }: { article: any }) => {
         >
           <Check size={18} />
         </Button>
-        <Button
+        {/* <Button
           onClick={() => setRawArticlesAtom([])}
           className='w-7 ml-2 h-7'
           size='icon'
           variant='destructive'
         >
           <Minus size={18} />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

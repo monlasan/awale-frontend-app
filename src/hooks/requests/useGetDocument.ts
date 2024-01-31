@@ -1,9 +1,12 @@
 import documentService from '@/services/http/document.service';
 import useSWR from 'swr';
+import React from 'react';
+import { generateRandomPassword } from '@/lib/utils';
 
 function useGetDocument(documentId: string | undefined) {
+  // const random = React.useRef(Date.now());
   const { data, error, isLoading } = useSWR(
-    'get_document',
+    ['get_document', documentId],
     async () => await documentService.getDocument(documentId),
     {
       onErrorRetry: (error, key, config, revalidate, { retryCount }) => {

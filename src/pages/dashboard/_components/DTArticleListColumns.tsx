@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { formatDate } from '@/lib/utils';
+import { formatDate, formatPrice } from '@/lib/utils';
 
 // import { Badge } from '@/components/ui/badge';
 
@@ -72,6 +72,9 @@ export const columns: ColumnDef<Article>[] = [
   {
     accessorKey: 'price',
     header: 'Price',
+    cell: ({ row }) => {
+      return <span>{formatPrice(row.getValue('price'))}</span>;
+    },
   },
   {
     accessorKey: 'created_at',

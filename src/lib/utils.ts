@@ -112,9 +112,25 @@ export function processStatusColor(
       color = '283, 100%, 30%';
       break;
     default:
+      color = '183, 100%, 30%';
       break;
   }
   return color;
+}
+
+export function generateRandomColor() {
+  // Generate random R, G, and B values
+  var r = Math.floor(Math.random() * 256);
+  var g = Math.floor(Math.random() * 256);
+  var b = Math.floor(Math.random() * 256);
+
+  // Convert decimal to hexadecimal
+  var rHex = r.toString(16).padStart(2, '0');
+  var gHex = g.toString(16).padStart(2, '0');
+  var bHex = b.toString(16).padStart(2, '0');
+
+  // Concatenate and return the color in hexadecimal format
+  return '#' + rHex + gHex + bHex;
 }
 
 interface Item {

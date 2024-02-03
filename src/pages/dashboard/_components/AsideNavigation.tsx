@@ -99,14 +99,14 @@ const AsideNavigation = () => {
       ],
     },
     {
-      groupName: 'Inventory',
+      groupName: 'Inventories',
       groupIcon: <Boxes size={20} />,
       groupLink: null,
       groupLinkIsActive: currentPath.startsWith('/inventory'),
       groupLinks: [
         {
           to: '/inventory/overview',
-          text: 'Inventory overview',
+          text: 'Inventories overview',
           linkIcon: <FileBox size={20} />,
           isActive: currentPath.startsWith('/inventory/overview'),
         },

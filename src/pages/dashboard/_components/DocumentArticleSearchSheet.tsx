@@ -37,7 +37,7 @@ const DocumentArticlesSearchSheet = () => {
       folderId: atomDocument.folder.id,
       cartData: grouped_articles_atom,
     });
-    mutate('get_document');
+    mutate(['get_document', atomDocument.id]);
     toast.success('Document cart updated.');
     setIsUpdatingCart(false);
   };

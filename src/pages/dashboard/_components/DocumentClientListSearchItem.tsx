@@ -21,7 +21,7 @@ const DocumentClientListSearchItem = ({ client }: { client: IClient }) => {
       folderId: atomDocument.folder.id,
       clientInfos,
     });
-    mutate('get_document');
+    mutate(['get_document', atomDocument.id]);
     toast.success('Document client updated.');
     setIsUpdatingClient(false);
   };

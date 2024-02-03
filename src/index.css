@@ -71,6 +71,8 @@
     color: #222;
   }
   html.dark body {
+    /* border-color: #455a4c; */
+    /* border-color: #2fc175; */
     background-color: hsl(var(--background));
     /* border-color: hsl(0, 0%, 29%);
     border-color: hsl(0, 52%, 50%);

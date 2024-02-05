@@ -8,9 +8,11 @@ export default function Home() {
   return (
     <div className='bg-zinc-50 text-zinc-800'>
       <Header />
-      <HeroSection />
-      <Features />
-      <Faq />
+      <main>
+        <HeroSection />
+        <Features />
+        <Faq />
+      </main>
       <Footer />
     </div>
   );

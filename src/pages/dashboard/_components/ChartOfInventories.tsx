@@ -6,63 +6,33 @@ import React from 'react';
 const data = [
   {
     id: '7b2b72fd-ae54-4d8b-8a73-2e4129bdaae1',
-    reference: 'INV-8411c4acc4',
-    name: 'Stock Nairobi',
-    address: 'C/SB 5246 Express NIT',
-    description:
-      'This is a place to store all the product manufactured in Nairobi',
+    name: 'Stock Nord',
     physical_quantity: 4,
     limit: 5,
-    created_at: '2024-01-26T22:21:40.306Z',
-    updated_at: '2024-01-26T22:21:40.306Z',
   },
   {
     id: '7b2b72fd-ae54-4d8b-8a73-2e4129bdaae1',
-    reference: 'INV-8411c4acc4',
-    name: 'Stock E',
-    address: 'C/SB 5246 Express NIT',
-    description:
-      'This is a place to store all the product manufactured in Nairobi',
+    name: 'Stock Sud',
     physical_quantity: 4,
-    limit: 5,
-    created_at: '2024-01-26T22:21:40.306Z',
-    updated_at: '2024-01-26T22:21:40.306Z',
+    limit: 3,
   },
   {
     id: '7b2b72fd-ae54-4d8b-8a73-2e4129bdaae1',
-    reference: 'INV-8411c4acc4',
-    name: 'Stock vv',
-    address: 'C/SB 5246 Express NIT',
-    description:
-      'This is a place to store all the product manufactured in Nairobi',
+    name: 'Stock Ouest',
     physical_quantity: 4,
     limit: 5,
-    created_at: '2024-01-26T22:21:40.306Z',
-    updated_at: '2024-01-26T22:21:40.306Z',
   },
   {
     id: '7ba2b72fd-ae54-4d8b-8a73-2e4129bdaae1',
-    reference: 'INV-8411c4acc4',
-    name: 'Stock Parakou',
-    address: 'C/SB 5246 Express NIT',
-    description:
-      'This is a place to store all the product manufactured in Nairobi',
+    name: 'Stock Est',
     physical_quantity: 2,
-    limit: 5,
-    created_at: '2024-01-26T22:21:40.306Z',
-    updated_at: '2024-01-26T22:21:40.306Z',
+    limit: 7,
   },
   {
     id: '7ba2b72fd-ae54-4d8b-8a73-2e4129bdaae1',
-    reference: 'INV-8411c4acc4',
-    name: 'Stock a',
-    address: 'C/SB 5246 Express NIT',
-    description:
-      'This is a place to store all the product manufactured in Nairobi',
+    name: 'Stock Main',
     physical_quantity: 1,
-    limit: 5,
-    created_at: '2024-01-26T22:21:40.306Z',
-    updated_at: '2024-01-26T22:21:40.306Z',
+    limit: 3,
   },
 ];
 

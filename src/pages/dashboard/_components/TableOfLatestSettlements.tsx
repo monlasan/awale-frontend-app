@@ -8,7 +8,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 const TableOfLatestSettlements = () => {
   const { data, error, isLoading } = useSearchPayments();
-  console.log('PAYMENTS', data);
   return (
     <Card className='text-xs h-full min-w-[300px] font-medium flex-1'>
       <CardHeader>

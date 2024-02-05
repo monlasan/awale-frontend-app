@@ -204,8 +204,8 @@ const PurchaseDocument = () => {
               <div className='flex items-center ml-auto'>
                 {/* <span className='opacity-50'>|</span> */}
                 <div className='flex items-center flex-wrap'>
-                  <Button variant='dark'>Cancel order</Button>
-                  <Button>Validate order</Button>
+                  <Button variant='dark'>Cancel</Button>
+                  <Button>Validate</Button>
                 </div>
               </div>
             </div>
@@ -279,12 +279,13 @@ const PurchaseDocument = () => {
                       <span className='text-xs opacity-60'>Balance due</span>
                       <br />
                       <span className='text-2xl font-bold'>
-                        {formatPrice(documentData.folder.amount - 15)}
+                        {formatPrice(documentData.folder.amount - 0)}
+                        {/* {formatPrice(documentData.folder.amount - 15)} */}
                       </span>
                     </div>
                   </div>
                   <div className='bg-accent text-sm p-1 px-2 border  w-fit'>
-                    Due Date: 06/9/2018
+                    Due Date: 06/9/2024
                   </div>
                 </div>
               </div>

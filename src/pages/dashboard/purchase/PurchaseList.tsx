@@ -56,9 +56,9 @@ const PurchaseList = () => {
 
   return (
     <DashboardLayout>
-      <div className='px-14 py-4 h-full flex flex-col'>
-        <Card>
-          <CardHeader className='flex p-3 px-6 flex-row justify-between items-center'>
+      <div className='px-14 py-4 pb-12 h-full flex flex-col'>
+        <Card className='mb-4'>
+          <CardHeader className='flex py-6 flex-row justify-between items-center'>
             <CardTitle>Purchase documents</CardTitle>
           </CardHeader>
 
@@ -66,7 +66,7 @@ const PurchaseList = () => {
             <DataTable columns={columns} data={data} />
           </CardContent> */}
         </Card>
-        <div className='grid gap-4 p-6 bg-white dark:bg-secondary border-l border-r border-b mb-4'>
+        {/* <div className='grid gap-4 p-6 bg-white dark:bg-secondary border-l border-r border-b mb-4'>
           <div className='grid grid-cols-2 gap-4 gap-y-1 flex-1'>
             <div>
               <Label htmlFor='fullName'>Name</Label>
@@ -99,10 +99,10 @@ const PurchaseList = () => {
               Search
             </Button>
           </div>
-        </div>
+        </div> */}
         {isLoading ? (
           <div className='flex p-6 justify-center'>
-            <Loader size={30} className='animate-spin' />
+            <Loader size={30} className='animate-spin text-primary' />
           </div>
         ) : (
           <div className='bg-white dark:bg-secondary'>

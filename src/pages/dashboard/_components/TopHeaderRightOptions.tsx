@@ -33,16 +33,26 @@ const TopHeaderRightOptions = () => {
   return (
     <div className='flex items-center px-4 gap-2 text-zinc-300'>
       <ThemeToggle />
-      <Button variant='ghost' size='icon' className='relative'>
+      {/* <Button variant='ghost' size='icon' className='relative'>
         <Cog size={21} />
         <span className='sr-only'>Settings Icon</span>
-      </Button>
+      </Button> */}
       <Button variant='ghost' size='icon' className='relative'>
         <Bell size={21} />
         <span className='absolute top-2 right-2 animate-ping h-2.5 w-2.5 rounded-full bg-primary'></span>
         <span className='sr-only'>Notifications Icon</span>
       </Button>
-      <DropdownMenu>
+      <Avatar className='ml-3'>
+        <AvatarImage
+          src={currentUser?.user.avatar_url}
+          alt={'@' + currentUser?.user.first_name + currentUser?.user.last_name}
+        />
+        <AvatarFallback className='text-black dark:text-zinc-200'>
+          {currentUser?.user.first_name[0]}
+          {currentUser?.user.last_name[0]}
+        </AvatarFallback>
+      </Avatar>
+      {/* <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant='link'
@@ -83,7 +93,7 @@ const TopHeaderRightOptions = () => {
             </Button>
           </DropdownMenuItem>
         </DropdownMenuContent>
-      </DropdownMenu>
+      </DropdownMenu> */}
     </div>
   );
 };

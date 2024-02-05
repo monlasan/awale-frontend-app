@@ -49,9 +49,9 @@ const InventoryOverview = () => {
   }
   return (
     <DashboardLayout>
-      <div className='px-14 py-4 h-full flex flex-col'>
+      <div className='px-14 py-4 pb-12 h-full flex flex-col'>
         <Card className='mb-4'>
-          <CardHeader className='flex py-3 pb-4 flex-row justify-between items-center'>
+          <CardHeader className='flex py-4 flex-row justify-between items-center'>
             <CardTitle>Inventory overview</CardTitle>
             <div className='flex items-center gap-2'>
               <form className='flex items-center'>
@@ -89,7 +89,7 @@ const InventoryOverview = () => {
 
         {isLoading ? (
           <div className='flex p-6 justify-center'>
-            <Loader size={30} className='animate-spin' />
+            <Loader size={30} className='animate-spin text-primary' />
           </div>
         ) : (
           <>

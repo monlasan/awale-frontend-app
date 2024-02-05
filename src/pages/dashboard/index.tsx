@@ -17,7 +17,7 @@ import TableOfLatestSettlements from './_components/TableOfLatestSettlements';
 const Dashboard = () => {
   return (
     <DashboardLayout>
-      <div className='lg:px-14 py-4 h-full flex flex-col'>
+      <div className='lg:px-14 py-4 pb-12 h-full flex flex-col'>
         <div className='flex-1 flex flex-col gap-3 px-4 py-3'>
           <h2 className='text-2xl font-semibold'>Dashboard</h2>
           <div className='flex gap-3 flex-wrap'>

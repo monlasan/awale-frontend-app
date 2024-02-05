@@ -15,13 +15,35 @@ const DashboardLayout = ({ children }: TLayout) => {
   return (
     <div className='flex flex-col min-h-screen'>
       <header className='flex fixed top-0 right-0 left-0 z-30 justify-between items-center h-[58px] bg-zinc-800 border-b border-zinc-700'>
-        <div className='flex items-center text-zinc-400 gap-2 px-4 py-3'>
-          <Link
-            to='/'
-            className='w-8 h-8 border-8 border-primary rounded-xl skew-x-12 -skew-y-6 text-zinc-300'
-          ></Link>
-          {/* Swoole */}
-        </div>
+        <Link
+          to='/'
+          className='flex items-center text-zinc-800 gap-2 px-4 py-3'
+        >
+          <div className='w-10 aspect-auto'>
+            <img
+              src='/awale2.png'
+              className='w-full h-full'
+              alt='Awale Store Logo'
+            />
+          </div>
+          <div className='flex flex-col translate-y-1 text-sm font-semibold'>
+            <span className='text-primary'>awale</span>
+            <span className='-translate-y-2 text-white'>store</span>
+          </div>
+        </Link>
+        {/* <div className='flex items-center text-white gap-2 px-4 py-3'>
+          <Link to='/' className='w-10 aspect-auto  text-zinc-300'>
+            <img
+              src='/awale2.png'
+              className='w-full h-full'
+              alt='Awale Store Logo'
+            />
+          </Link>
+          <div className='flex flex-col translate-y-1 text-sm font-semibold'>
+            <span className='text-primary'>awale</span>
+            <span className='-translate-y-2'>store</span>
+          </div>
+        </div> */}
         <TopHeaderRightOptions />
       </header>
       <div className='flex flex-1'>

@@ -34,11 +34,13 @@ import { Box, Loader, Save } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import articleService from '@/services/http/article.service';
 import useSearchInventories from '@/hooks/requests/useSearchInventories';
+import { uploadImg } from '@/lib/utils';
 
 const formSchema = z.object({
   article_name: z.string().min(1, 'Please enter the article name'),
   description: z.string().min(1, 'Please enter a description'),
   price: z.string().min(1, 'Please enter the article price'),
+  photo: z.any(),
   inventory_id: z.string({
     required_error: 'Please select an inventory for the article',
   }),
@@ -47,6 +49,7 @@ const formSchema = z.object({
 const NewArticle = () => {
   const { data, error: ErrorInventory, isLoading } = useSearchInventories();
   const [loading, setLoading] = React.useState(false);
+  const [imageUrl, setImageUrl] = React.useState('');
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -60,7 +63,17 @@ const NewArticle = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     try {
-      // TODO: article photo
+      const imageMetadata = await uploadImg({
+        name: values.article_name + '-' + values.inventory_id,
+        imageData: values.photo,
+      });
+      setImageUrl(imageMetadata.data.url);
+    } catch (err: any) {
+      toast.error('Something went wrong while saving the image!');
+      setLoading(false);
+      return;
+    }
+    try {
       console.log('SAVE THE ARTICLE ▶', {
         name: values.article_name,
         ...values,
@@ -69,7 +82,7 @@ const NewArticle = () => {
         ...values,
         name: values.article_name,
         price: parseInt(values.price),
-        photo_url: null,
+        photo_url: imageUrl.length > 0 ? imageUrl : null,
       });
       toast.success('Article created successfully');
       form.reset();
@@ -120,6 +133,42 @@ const NewArticle = () => {
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name='photo'
+                  render={({ field: { value, onChange, ...field } }) => (
+                    <FormItem className='mx-6 p-3 border flex gap-4 bg-background'>
+                      <div className='flex-1'>
+                        <FormLabel>Photo</FormLabel>
+
+                        <FormControl>
+                          {/* <div className='w-full'>Pick an image</div> */}
+                          <Input
+                            disabled={loading}
+                            type='file'
+                            id='file'
+                            className='file:text-primary mt-2'
+                            onChange={(event) => {
+                              onChange(
+                                event.target.files && event.target.files[0]
+                              );
+                            }}
+                            placeholder='Enter the article photo'
+                            {...field}
+                          />
+                        </FormControl>
+                      </div>
+                      <div className='w-24 text-xs h-24 flex justify-center items-center border bg-secondary border-dashed'>
+                        {imageUrl.length > 0 ? (
+                          <img src={imageUrl} className='w-full h-full' />
+                        ) : (
+                          <span>No image</span>
+                        )}
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}

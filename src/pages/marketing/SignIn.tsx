@@ -24,7 +24,7 @@ import {
   signInFailure,
 } from '@/redux/user/user.slice';
 import { useAppDispatch, useAppSelector } from '@/hooks/useRedux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LocalStorage } from '@/lib/utils';
 
 const formSchema = z.object({
@@ -99,11 +99,24 @@ export default function SignIn() {
           />
         </svg>
 
-        <div className='absolute  inset-0 flex flex-col justify-center items-center gap-6 p-8'>
-          <span className='text-4xl text-center font-bold text-primary uppercase'>
-            swoole
-          </span>
-          <p className='font-bold text-center text-2xl'>
+        <div className='absolute  inset-0 flex flex-col justify-center items-center gap-4 p-8'>
+          {/* <Link to='/' className='text-4xl text-center font-bold text-primary'>
+            awale<span className='text-white'>store</span>
+          </Link> */}
+          <Link to='/' className='flex items-center text-zinc-800 gap-2'>
+            <div className='w-20 aspect-auto'>
+              <img
+                src='/awale2.png'
+                className='w-full h-full'
+                alt='Awale Store Logo'
+              />
+            </div>
+            <div className='flex flex-col translate-y-1 text-xl font-semibold'>
+              <span className='text-primary'>awale</span>
+              <span className='-translate-y-2 text-white'>store</span>
+            </div>
+          </Link>
+          <p className=' text-center  opacity-85'>
             Run your business like never before.
           </p>
         </div>

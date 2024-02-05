@@ -9,6 +9,7 @@ import {
   Boxes,
   FileBox,
   List,
+  LogOut,
   Menu,
   PackagePlus,
   PieChart,
@@ -23,13 +24,30 @@ import {
   Users,
 } from 'lucide-react';
 import { useDispatch } from 'react-redux';
+import { signOut } from '@/redux/user/user.slice';
+
 import { Link, useLocation } from 'react-router-dom';
+import authService from '@/services/http/auth.service';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
 
 const AsideNavigation = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const currentPath = location.pathname;
+  const { currentUser } = useAppSelector((state) => state.user);
   const { isToggled } = useAppSelector((state) => state.sidenav);
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOut());
+      await authService.logout();
+      toast.success('Disconnected successfully!');
+      // Hpow1O4k
+    } catch (err: any) {
+      toast.error(err);
+    }
+  };
 
   const GROUP_LINKS = [
     {
@@ -202,107 +220,131 @@ const AsideNavigation = () => {
     // bg-secondary text-secondary-foreground
     <div
       className={cn(
-        'fixed z-30 left-0 top-[58px] bottom-0  dark:bg-secondary dark:text-secondary-foreground  flex-col flex-shrink  border-r py-4 border-zinc-200 dark:border-zinc-700',
+        'fixed z-30 left-0 top-[58px] bottom-0 dark:bg-secondary dark:text-secondary-foreground flex flex-col justify-center flex-shrink transition-all border-r pt-4 pb-2 border-zinc-200 dark:border-zinc-700',
         !isToggled && 'max-w-52 sm:w-full transition-all'
       )}
     >
-      <div className='px-4 mb-3'>
+      <div className='flex justify-center mx-3.5 mb-3'>
         <button
           onClick={() => dispatch(toggle())}
-          className='p-3 bg-secondary w-5 h-5 grid place-content-center'
+          className='bg-secondary mr-auto h-6 px-1.5 text-sm flex items-center'
         >
           <Menu size={14} />
+          <span className={cn('hidden', !isToggled && 'sm:inline-block ml-2')}>
+            Menu
+          </span>
         </button>
       </div>
 
-      {GROUP_LINKS.map((group) => (
-        <div
-          key={group.groupName}
-          className='relative grid text-sm group font-medium dark:font-normal'
-        >
-          {group.groupLink && (
-            <Link
-              to={group.groupLink}
-              className={cn(
-                ' flex gap-2 items-center border-l-4  border-transparent hover:border-primary hover:bg-background transition-all font-medium px-3.5 py-3 ',
-                group.groupLinkIsActive &&
-                  'border-l-4 border-primary bg-muted hover:bg-muted'
-              )}
-            >
-              <span
+      <div className='flex-1'>
+        {GROUP_LINKS.map((group) => (
+          <div
+            key={group.groupName}
+            className='relative grid text-sm group font-medium dark:font-normal'
+          >
+            {group.groupLink && (
+              <Link
+                to={group.groupLink}
                 className={cn(
-                  'text-foreground opacity-30 dark:opacity-50 dark:group-hover:opacity-100',
-                  group.groupLinkIsActive && 'opacity-60 dark:opacity-100'
+                  ' flex gap-2 items-center border-l-4  border-transparent hover:border-primary hover:bg-background transition-all font-medium px-3.5 py-3 ',
+                  group.groupLinkIsActive &&
+                    'border-l-4 border-primary bg-muted hover:bg-muted'
                 )}
               >
-                {group.groupIcon}
-              </span>
-
-              <span
-                className={cn(
-                  'ml-1 hidden dark:group-hover:opacity-100 transition-all',
-                  !group.groupLinkIsActive && 'dark:opacity-60',
-                  !isToggled && 'sm:inline-block '
-                )}
-              >
-                {group.groupName}
-              </span>
-            </Link>
-          )}
-          {!group.groupLink && (
-            <div
-              className={cn(
-                ' flex gap-2 items-center border-l-4 border-transparent hover:border-primary hover:bg-background  dark:opacity-50 dark:hover:opacity-100 transition-all font-medium px-3.5 py-3 select-none',
-                group.groupLinkIsActive &&
-                  'border-primary bg-muted hover:bg-muted  dark:opacity-100'
-              )}
-            >
-              <span
-                className={cn(
-                  'text-foreground opacity-60 dark:opacity-100 mr-1 inline-block',
-                  !group.groupLinkIsActive && 'opacity-30 dark:opacity-100'
-                )}
-              >
-                {group.groupIcon}
-              </span>
-
-              <span
-                className={cn(
-                  'transition-all hidden',
-                  !isToggled && 'sm:inline-block '
-                )}
-              >
-                {group.groupName}
-              </span>
-            </div>
-          )}
-          {group.groupLinks && (
-            <ul className='absolute  z-50 w-60  right-0 hidden dark:bg-secondary bg-white border dark:border-border border-l-border dark:border-l-secondary group-hover:flex flex-col translate-x-full top-0'>
-              {group.groupLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
+                <span
                   className={cn(
-                    'border-l-4 hover:border-primary border-transparent hover:bg-background inline-block',
-                    link.isActive &&
-                      'border-l-4 border-primary hover:bg-muted bg-muted'
+                    'text-foreground opacity-30 dark:opacity-50 dark:group-hover:opacity-100',
+                    group.groupLinkIsActive && 'opacity-60 dark:opacity-100'
                   )}
                 >
-                  <li
+                  {group.groupIcon}
+                </span>
+
+                <span
+                  className={cn(
+                    'ml-1 hidden dark:group-hover:opacity-100 transition-all',
+                    !group.groupLinkIsActive && 'dark:opacity-60',
+                    !isToggled && 'sm:inline-block '
+                  )}
+                >
+                  {group.groupName}
+                </span>
+              </Link>
+            )}
+            {!group.groupLink && (
+              <div
+                className={cn(
+                  ' flex gap-2 items-center border-l-4 border-transparent hover:border-primary hover:bg-background  dark:opacity-50 dark:hover:opacity-100 transition-all font-medium px-3.5 py-3 select-none',
+                  group.groupLinkIsActive &&
+                    'border-primary bg-muted hover:bg-muted  dark:opacity-100'
+                )}
+              >
+                <span
+                  className={cn(
+                    'text-foreground opacity-60 dark:opacity-100 mr-1 inline-block',
+                    !group.groupLinkIsActive && 'opacity-30 dark:opacity-100'
+                  )}
+                >
+                  {group.groupIcon}
+                </span>
+
+                <span
+                  className={cn(
+                    'transition-all hidden',
+                    !isToggled && 'sm:inline-block '
+                  )}
+                >
+                  {group.groupName}
+                </span>
+              </div>
+            )}
+            {group.groupLinks && (
+              <ul className='absolute  z-50 w-60  right-0 hidden dark:bg-secondary bg-white border dark:border-border border-l-border dark:border-l-secondary group-hover:flex flex-col translate-x-full top-0'>
+                {group.groupLinks.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
                     className={cn(
-                      'flex items-center gap-3 px-3 whitespace-nowrap py-3 opacity-80 hover:opacity-100',
-                      link.isActive && 'opacity-100'
+                      'border-l-4 hover:border-primary border-transparent hover:bg-background inline-block',
+                      link.isActive &&
+                        'border-l-4 border-primary hover:bg-muted bg-muted'
                     )}
                   >
-                    <span className='opacity-70'>{link.linkIcon}</span>
-                    <span>{link.text}</span>
-                  </li>
-                </Link>
-              ))}
-            </ul>
-          )}
-        </div>
-      ))}
+                    <li
+                      className={cn(
+                        'flex items-center gap-3 px-3 whitespace-nowrap py-3 opacity-80 hover:opacity-100',
+                        link.isActive && 'opacity-100'
+                      )}
+                    >
+                      <span className='opacity-70'>{link.linkIcon}</span>
+                      <span>{link.text}</span>
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className='flex justify-center'>
+        <button
+          onClick={handleSignOut}
+          className='mr-auto mx-3 h-9 px-1.5 text-sm flex items-center'
+        >
+          {/* <Menu size={14} /> */}
+          <LogOut size={19} className='text-destructive' />
+          <span
+            className={cn(
+              'hidden transition-all text-destructive',
+              !isToggled && 'sm:inline-block ml-2'
+            )}
+          >
+            Log out
+          </span>
+        </button>
+      </div>
+      <button onClick={handleSignOut} className='p-1'></button>
     </div>
   );
 };

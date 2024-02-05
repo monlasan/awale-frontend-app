@@ -22,6 +22,8 @@ import InventoryOverview from './pages/dashboard/inventory/InventoryOverview';
 import PurchaseDocument from './pages/dashboard/purchase/PurchaseDocument';
 import PurchaseDocumentNew from './pages/dashboard/purchase/PurchaseDocumentNew';
 import SaleDocumentNew from './pages/dashboard/sale/SaleDocumentNew';
+import Terms from './pages/marketing/Terms';
+import Privacy from './pages/marketing/Privacy';
 
 function App() {
   return (
@@ -32,10 +34,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* Marketing pages */}
-          <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
 
           <Route element={<AlreadyLoggedIn />}>
+            <Route path='/' element={<Home />} />
+            <Route path='/terms' element={<Terms />} />
+            <Route path='/privacy' element={<Privacy />} />
             <Route path='/sign-in' element={<SignIn />} />
             <Route path='/sign-up' element={<SignUp />} />
           </Route>

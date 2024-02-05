@@ -104,7 +104,7 @@ const ContactList = () => {
         </div>
         {isLoading ? (
           <div className='flex p-6 justify-center'>
-            <Loader size={30} className='animate-spin' />
+            <Loader size={30} className='animate-spin text-primary' />
           </div>
         ) : (
           <div className='bg-white dark:bg-secondary'>

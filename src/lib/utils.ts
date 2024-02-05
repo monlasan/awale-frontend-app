@@ -1,3 +1,5 @@
+import imgbbService from '@/services/http/imgbb.service';
+import axios from 'axios';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -170,4 +172,31 @@ export function groupItems(items: Item[]) {
   }
 
   return result;
+}
+
+export async function uploadImg({
+  name,
+  imageData,
+}: {
+  name: string;
+  imageData: any;
+}) {
+  const data = new FormData();
+  data.append('name', name);
+  data.append('key', import.meta.env.VITE_IMGBB_APIKEY);
+  data.append('image', imageData);
+
+  const imageMetadata = await imgbbService.upload(data);
+  // try {
+  //   const res = await axios.post('https://api.imgbb.com/1/upload', data);
+  //   const photoMetadata = res.data;
+  //   console.log(photoMetadata);
+  return imageMetadata;
+  //   // Do some checks: isImage, sizeLimit etc...
+  //   // if () {}
+  //   // return photoMetadata.data;
+  // } catch (error) {
+
+  //   throw Error('Something went wrong while saving image');
+  // }
 }

@@ -41,13 +41,19 @@ It provides a comprehensive suite of tools to manage various aspects of a busine
 
 Getting started
 To get started with this project:
+
 Backend API:
 
 ```bash
   git clone https://github.com/monlasan/awale-backend-api.git
 ```
 
-and copy the .env.sample variables into a separate .env file, fill them out.
+and copy the .env.sample variables into a separate .env file, fill them out and following run the commands:
+
+```bash
+  yarn install
+  yarn dev
+```
 
 Frontend API:
 
@@ -55,8 +61,7 @@ Frontend API:
   git clone https://github.com/monlasan/awale-frontend-app.git
 ```
 
-and copy the .env.sample variables into a separate .env file, fill them out
-Run the commands:
+and copy the .env.sample variables into a separate .env file, fill them out and following run the commands:
 
 ```bash
   pnpm install

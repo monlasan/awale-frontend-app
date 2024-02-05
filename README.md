@@ -39,7 +39,6 @@ It provides a comprehensive suite of tools to manage various aspects of a busine
 
 ## Getting started
 
-Getting started
 To get started with this project:
 
 Backend API:
